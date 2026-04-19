@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMP Diagnostic Quiz</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#b45309;--accent-light:#fef3c7;--border:#e7e5e4;--card:#fff;--success:#16a34a;--error:#dc2626;--blue:#2563eb}
+html{font-size:17px}
+body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6;min-height:100vh}
+.container{max-width:760px;margin:0 auto;padding:2rem 1.5rem}
+h1{font-size:1.6rem;color:var(--accent);margin-bottom:.3rem}
+.subtitle{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
+/* Progress */
+.progress-wrap{display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem}
+.progress-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:4px;transition:width .3s}
+.progress-text{font-size:.8rem;color:var(--muted);white-space:nowrap}
+/* Timer */
+.timer{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem;display:flex;align-items:center;gap:.4rem}
+.timer .icon{font-size:1rem}
+/* Question card */
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+.q-num{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+.q-domain{font-size:.7rem;padding:.2rem .5rem;border-radius:4px;background:var(--accent-light);color:var(--accent);font-weight:600}
+.q-text{font-size:1rem;margin-bottom:1rem;line-height:1.65}
+.options{display:flex;flex-direction:column;gap:.5rem}
+.option{display:flex;align-items:flex-start;gap:.6rem;padding:.7rem .9rem;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;font-size:.92rem}
+.option:hover{border-color:var(--accent);background:var(--accent-light)}
+.option.selected{border-color:var(--blue);background:#eff6ff}
+.option.correct{border-color:var(--success);background:#f0fdf4}
+.option.incorrect{border-color:var(--error);background:#fef2f2}
+.option.disabled{pointer-events:none;opacity:.7}
+.option.disabled.correct{opacity:1}
+.option .letter{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;transition:all .15s}
+.option.selected .letter{border-color:var(--blue);background:var(--blue);color:#fff}
+.option.correct .letter{border-color:var(--success);background:var(--success);color:#fff}
+.option.incorrect .letter{border-color:var(--error);background:var(--error);color:#fff}
+/* Explanation */
+.explanation{margin-top:.8rem;padding:.8rem 1rem;border-radius:8px;font-size:.88rem;line-height:1.55;display:none}
+.explanation.show{display:block}
+.explanation.right{background:#f0fdf4;border:1px solid #bbf7d0}
+.explanation.wrong{background:#fef2f2;border:1px solid #fecaca}
+/* Buttons */
+.btn-row{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+button{padding:.55rem 1.2rem;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;font-size:.85rem;font-family:inherit;transition:all .15s}
+button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.primary:hover{opacity:.85}
+button:disabled{opacity:.3;cursor:default}
+/* Results */
+.results{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:center}
+.results h2{font-size:1.4rem;color:var(--accent);margin-bottom:.5rem}
+.score-big{font-size:3rem;font-weight:800;color:var(--accent);margin:.5rem 0}
+.score-label{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+.domain-scores{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.domain-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem 1.2rem;min-width:140px}
+.domain-card .name{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.domain-card .val{font-size:1.4rem;font-weight:700}
+.domain-card .val.good{color:var(--success)}
+.domain-card .val.ok{color:var(--accent)}
+.domain-card .val.bad{color:var(--error)}
+/* Nav */
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+.nav-row .info{font-size:.8rem;color:var(--muted)}
+/* Flag */
+.flag-btn{font-size:.75rem;padding:.3rem .6rem;background:transparent;border:1px solid var(--border);color:var(--muted)}
+.flag-btn.flagged{background:#fef3c7;border-color:#fbbf24;color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+<script src="quiz-data.js"></script>
+<script>
+const app = document.getElementById('app');
+let answers = new Array(quizQuestions.length).fill(-1);
+let revealed = new Array(quizQuestions.length).fill(false);
+let flagged = new Set();
+let currentQ = 0;
+let startTime = null;
+let timerInterval = null;
+let quizFinished = false;
+
+function startQuiz() {
+  startTime = Date.now();
+  timerInterval = setInterval(updateTimer, 1000);
+  renderQuestion();
+}
+
+function updateTimer() {
+  if (!startTime) return;
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
+  const el = document.getElementById('timer-val');
+  if (el) el.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+}
+
+function selectAnswer(idx) {
+  if (revealed[currentQ]) return;
+  answers[currentQ] = idx;
+  renderQuestion();
+}
+
+function revealAnswer() {
+  revealed[currentQ] = true;
+  renderQuestion();
+}
+
+function toggleFlag() {
+  if (flagged.has(currentQ)) flagged.delete(currentQ); else flagged.add(currentQ);
+  renderQuestion();
+}
+
+function navTo(idx) {
+  currentQ = idx;
+  renderQuestion();
+}
+
+function finishQuiz() {
+  clearInterval(timerInterval);
+  quizFinished = true;
+  renderResults();
+}
+
+function renderQuestion() {
+  const q = quizQuestions[currentQ];
+  const isRevealed = revealed[currentQ];
+  const selected = answers[currentQ];
+  const isFlagged = flagged.has(currentQ);
+  const answeredCount = answers.filter(a => a >= 0).length;
+  const pct = (answeredCount / quizQuestions.length * 100).toFixed(0);
+
+  let optionsHtml = q.o.map((opt, i) => {
+    const letters = ['A','B','C','D'];
+    let cls = 'option';
+    if (isRevealed) {
+      cls += ' disabled';
+      if (i === q.a) cls += ' correct';
+      else if (i === selected && i !== q.a) cls += ' incorrect';
+    } else if (i === selected) {
+      cls += ' selected';
+    }
+    return `<div class="${cls}" onclick="selectAnswer(${i})"><span class="letter">${letters[i]}</span><span>${opt}</span></div>`;
+  }).join('');
+
+  let explHtml = '';
+  if (isRevealed) {
+    const isCorrect = selected === q.a;
+    explHtml = `<div class="explanation show ${isCorrect?'right':'wrong'}"><strong>${isCorrect?'✓ Correct!':'✗ Incorrect'}</strong><br>${q.e}</div>`;
+  }
+
+  // Mini nav dots
+  let dotsHtml = '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:1rem">';
+  quizQuestions.forEach((_, i) => {
+    let bg = '#e7e5e4';
+    if (answers[i] >= 0 && revealed[i]) {
+      bg = answers[i] === quizQuestions[i].a ? '#16a34a' : '#dc2626';
+    } else if (answers[i] >= 0) bg = '#2563eb';
+    if (flagged.has(i)) bg = '#f59e0b';
+    const border = i === currentQ ? '2px solid #1c1917' : '2px solid transparent';
+    dotsHtml += `<div onclick="navTo(${i})" style="width:20px;height:20px;border-radius:4px;background:${bg};cursor:pointer;border:${border};font-size:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">${i+1}</div>`;
+  });
+  dotsHtml += '</div>';
+
+  app.innerHTML = `
+    <h1>PMP Diagnostic Quiz</h1>
+    <div class="subtitle">50 Questions · Week 1 Foundation</div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="progress-text">${answeredCount}/${quizQuestions.length}</div>
+    </div>
+    <div class="timer"><span class="icon">⏱</span> <span id="timer-val">0:00</span></div>
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Question ${currentQ+1} of ${quizQuestions.length}</span>
+        <span class="q-domain">${q.d}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">${optionsHtml}</div>
+      ${explHtml}
+      <div class="btn-row">
+        ${!isRevealed && selected >= 0 ? '<button class="primary" onclick="revealAnswer()">Check Answer</button>' : ''}
+        <button class="flag-btn${isFlagged?' flagged':''}" onclick="toggleFlag()">${isFlagged?'🚩 Flagged':'🏳 Flag'}</button>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button ${currentQ===0?'disabled':''} onclick="navTo(${currentQ-1})">← Previous</button>
+      <div class="info">Page ${currentQ+1} of ${quizQuestions.length}</div>
+      ${currentQ < quizQuestions.length-1
+        ? `<button onclick="navTo(${currentQ+1})">Next →</button>`
+        : `<button class="primary" onclick="finishQuiz()">Finish Quiz</button>`}
+    </div>
+    ${dotsHtml}
+  `;
+  updateTimer();
+}
+
+function renderResults() {
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
+  let correct = 0;
+  const domainStats = {People:{c:0,t:0},Process:{c:0,t:0},"Business Environment":{c:0,t:0}};
+  quizQuestions.forEach((q, i) => {
+    const d = q.d === "Business Environment" ? "Business Environment" : q.d;
+    if (!domainStats[d]) domainStats[d] = {c:0,t:0};
+    domainStats[d].t++;
+    if (answers[i] === q.a) { correct++; domainStats[d].c++; }
+  });
+  const pct = Math.round(correct / quizQuestions.length * 100);
+  let grade = pct >= 80 ? 'Strong foundation — ahead of schedule' : pct >= 60 ? 'Solid start — focus on weak areas' : pct >= 40 ? 'Expected for Week 1 — use results to guide study' : 'Re-read Week 1 materials before moving on';
+
+  let domainHtml = Object.entries(domainStats).map(([name, s]) => {
+    const dp = s.t > 0 ? Math.round(s.c/s.t*100) : 0;
+    const cls = dp >= 70 ? 'good' : dp >= 50 ? 'ok' : 'bad';
+    return `<div class="domain-card"><div class="name">${name}</div><div class="val ${cls}">${dp}%</div><div style="font-size:.7rem;color:#78716c">${s.c}/${s.t}</div></div>`;
+  }).join('');
+
+  // Review section
+  let reviewHtml = '<div style="text-align:left;margin-top:2rem">';
+  quizQuestions.forEach((q, i) => {
+    const isCorrect = answers[i] === q.a;
+    if (!isCorrect) {
+      const letters = ['A','B','C','D'];
+      reviewHtml += `<div style="background:#fff;border:1px solid #e7e5e4;border-radius:8px;padding:1rem;margin-bottom:.8rem">
+        <div style="font-size:.75rem;color:#b45309;font-weight:700">Q${i+1} (${q.d}) — ✗ Incorrect</div>
+        <div style="margin:.4rem 0;font-size:.9rem">${q.q}</div>
+        <div style="font-size:.85rem;color:#dc2626">Your answer: ${answers[i]>=0?letters[answers[i]]+') '+q.o[answers[i]]:'(unanswered)'}</div>
+        <div style="font-size:.85rem;color:#16a34a">Correct: ${letters[q.a]}) ${q.o[q.a]}</div>
+        <div style="font-size:.82rem;color:#78716c;margin-top:.3rem">${q.e}</div>
+      </div>`;
+    }
+  });
+  reviewHtml += '</div>';
+
+  app.innerHTML = `
+    <div class="results">
+      <h2>Quiz Complete!</h2>
+      <div class="score-big">${pct}%</div>
+      <div class="score-label">${correct} of ${quizQuestions.length} correct · ${mins}m ${secs}s</div>
+      <div style="margin-bottom:1rem;font-size:.9rem;color:#78716c">${grade}</div>
+      <div class="domain-scores">${domainHtml}</div>
+      <button class="primary" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+    <h2 style="margin-top:2rem;font-size:1.1rem;color:#b45309">Review Incorrect Answers</h2>
+    ${reviewHtml}
+  `;
+}
+
+function resetQuiz() {
+  answers = new Array(quizQuestions.length).fill(-1);
+  revealed = new Array(quizQuestions.length).fill(false);
+  flagged = new Set();
+  currentQ = 0;
+  quizFinished = false;
+  startTime = Date.now();
+  timerInterval = setInterval(updateTimer, 1000);
+  renderQuestion();
+}
+
+// Start
+startQuiz();
+</script>
+</body>
+</html>
