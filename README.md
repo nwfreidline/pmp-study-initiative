@@ -1,96 +1,102 @@
-# PMP Exam Preparation
+# 📘 PM Study Book
 
-**Priority: HIGH — Exam within ~2 months (target: June 2026)**
+A free, comprehensive, interactive study guide for the **PMP (Project Management Professional)** certification exam.
+
+**[→ Start Studying](https://nwfreidline.github.io/pm-study-book/)** · **[→ Take the Quiz](https://nwfreidline.github.io/pm-study-book/quiz.html)**
 
 ---
 
-## Workspace Structure
+## What Is This?
+
+A self-contained HTML study book and quiz app covering everything you need to pass the PMP exam. No account required, no paywall, no ads. Just open it in a browser and start reading.
+
+Built from the PMBOK Guide 7th Edition, the PMI Exam Content Outline, and the most recommended community study resources.
+
+## What's Covered
+
+| Chapter | Topic | Pages |
+|---------|-------|-------|
+| 1 | Exam Overview | 4 |
+| 2 | The 12 PMBOK 7 Principles | 6 |
+| 3 | The 8 Performance Domains | 4 |
+| 4 | Delivery Approaches (Predictive / Agile / Hybrid) | 4 |
+| 5 | The PMI Mindset | 3 |
+| 6 | Week 1 Review | 1 |
+| 7 | People Domain Deep Dive (42% of exam) | 5 |
+| 8 | Process Domain Deep Dive (50% of exam) | 6 |
+| 9 | Business Environment Domain (8% of exam) | 1 |
+| 10 | Agile & Hybrid Deep Dive | 2 |
+| 11 | EVM & Calculations (All Formulas) | 1 |
+| 12 | Ethics & Professional Conduct | 1 |
+| 13 | Final Review & Quick Reference | 1 |
+| | **Total** | **39 pages** |
+
+Plus a **50-question diagnostic quiz** with per-question explanations and domain scoring.
+
+## Features
+
+**Study Book:**
+- 39 pages of exam-ready content across 13 chapters
+- Sidebar table of contents with chapter groupings
+- Page-by-page navigation (click, arrow keys, or buttons)
+- "Mark as Read" progress tracking (saved in your browser)
+- Clean serif typography designed for extended reading
+- Mobile-responsive layout
+
+**Quiz App:**
+- 50 scenario-based questions across all 3 exam domains
+- Select answer → check → see detailed explanation
+- Question flagging for review
+- Running timer
+- Domain-specific scoring breakdown
+- Full review of incorrect answers with explanations
+- Retake functionality
+
+## How to Use
+
+### Online (Recommended)
+Visit **[nwfreidline.github.io/pm-study-book](https://nwfreidline.github.io/pm-study-book/)** — works on any device.
+
+### Offline
+1. Download or clone this repo
+2. Open `index.html` in any browser
+3. All 5 files must be in the same folder
 
 ```
-/
-├── README.md                        ← You are here
-├── TODO.md                          ← Live to-do list (update as we go)
-├── IDEAS.md                         ← Brainstorm tracker (add ideas freely)
-│
-├── study-book/                      ← The interactive HTML study book
-│   ├── src/                         ← Source files (multi-file, for development)
-│   │   ├── index.html               ← Main study reader
-│   │   ├── quiz.html                ← Diagnostic quiz
-│   │   ├── pages.js                 ← All study content
-│   │   └── quiz-data.js             ← All quiz questions
-│   └── standalone/                  ← Self-contained files (for mobile/sharing)
-│       ├── index.html               ← Study reader (all JS inlined)
-│       └── quiz.html                ← Quiz (all JS inlined)
-│
-├── docs/                            ← Strategy and planning documents
-│   ├── strategy-mobile-access.md   ← How to study on your phone
-│   ├── strategy-pdf.md             ← Plan for the downloadable PDF guide
-│   └── strategy-website-app.md     ← Plan for the website and mobile app
-│
-├── PMBOKGuideSeventhEd_ENG.pdf      ← PMBOK 7th Edition (reference)
-├── PMP Exam Content Outline.pdf     ← Official exam blueprint
-└── PMI Certification Handbook.pdf   ← Eligibility and logistics
+index.html            ← Study book reader
+quiz.html             ← Quiz app
+pages.js              ← Study content (Ch 1-8)
+pages-continued.js    ← Study content (Ch 8-13)
+quiz-data.js          ← Quiz questions
 ```
 
----
+## Exam Quick Reference
 
-## Quick Links
+| Detail | Value |
+|--------|-------|
+| Questions | 180 (175 scored) |
+| Time | 230 minutes |
+| Breaks | After Q60 and Q120 (10 min each) |
+| Domains | People 42% · Process 50% · Business Environment 8% |
+| Scoring | Above Target / Target / Below Target / Needs Improvement |
+| Fee | $405 (PMI members) / $555 (non-members) |
 
-| What | Where |
-|------|-------|
-| To-do list | [TODO.md](TODO.md) |
-| Ideas tracker | [IDEAS.md](IDEAS.md) |
-| Mobile access strategy | [docs/strategy-mobile-access.md](docs/strategy-mobile-access.md) |
-| PDF guide strategy | [docs/strategy-pdf.md](docs/strategy-pdf.md) |
-| Website & app strategy | [docs/strategy-website-app.md](docs/strategy-website-app.md) |
-| Study book | [study-book/src/index.html](study-book/src/index.html) |
-| Quiz | [study-book/src/quiz.html](study-book/src/quiz.html) |
+## Contributing
 
----
+Found an error? Have a better explanation? Want to add practice questions?
 
-## Exam Overview
+Pull requests are welcome. Please keep the same HTML structure and style used in `pages.js`.
 
-- **Certification Body**: PMI (Project Management Institute)
-- **Exam Format**: 180 questions, 230 minutes
-- **Question Types**: Multiple choice, multiple response, matching, hotspot, fill-in-the-blank
-- **Passing Score**: PMI uses a psychometric model — target ~70%+ correct
-- **Domains**:
-  - People (42%) — leadership, team management, conflict resolution, stakeholder engagement
-  - Process (50%) — planning, scope, schedule, cost, quality, risk, procurement, integration
-  - Business Environment (8%) — benefits realization, compliance, organizational change
+## License
 
----
+This project is provided as a free educational resource. All content is original — synthesized from publicly available PMI standards, community study resources, and exam preparation best practices.
 
-## Study Strategy
+PMI, PMP, PMBOK, and the PMI logo are registered marks of the Project Management Institute, Inc. This project is not affiliated with or endorsed by PMI.
 
-| Week | Focus |
-|------|-------|
-| 1–2 | PMBOK 7 Principles + Performance Domains (foundation) |
-| 3–4 | Domain deep dives: People → Process → Business Environment |
-| 5–6 | Agile & Hybrid, EVM & Calculations, Ethics |
-| 7 | Practice exams + weak area review |
-| 8 | Final review, mock exams, exam-day prep |
+## Acknowledgments
 
----
-
-## Study Book Content Status
-
-| Chapter | Title | Status |
-|---------|-------|--------|
-| 1 | Exam Overview | ✅ Complete |
-| 2 | The 12 Principles | ✅ Complete |
-| 3 | Performance Domains | ✅ Complete (partial) |
-| 4–9 | Remaining chapters | 🔲 In progress |
-
-**Quiz bank:** 50 questions (Week 1 Foundation) — target: 500+
-
----
-
-## Initiative Goals
-
-1. **Personal exam prep** — Pass the PMP by June 2026
-2. **Free PDF guide** — Comprehensive, shareable, Reddit-ready
-3. **Website** — Low-cost subscription study platform
-4. **Mobile app** — iOS/Android, offline-capable
-
-See strategy files in `/docs` for detailed plans.
+Content informed by:
+- PMBOK Guide 7th Edition (PMI)
+- PMP Exam Content Outline 2021 (PMI)
+- Community resources from r/pmp, projectmanagement.com, and pmaspirant.com
+- Open Exam Prep (open-exam-prep.com)
