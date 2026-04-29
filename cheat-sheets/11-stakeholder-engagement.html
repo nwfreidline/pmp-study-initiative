@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stakeholder Engagement Levels — PMP Cheat Sheet</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#c026d3;--accent-light:#fae8ff;--border:#e7e5e4;--card-bg:#fff}
+html{font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+.sheet-header{background:linear-gradient(135deg,#701a75,#c026d3,#d946ef);color:#fff;padding:2rem 2rem 1.5rem}
+.sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}.sheet-header .back:hover{color:#fff}
+.sheet-header h1{font-size:1.8rem;margin-top:.5rem}.sheet-header .subtitle{opacity:.85;font-size:.95rem;margin-top:.3rem}
+.sheet-header .domain-badge{display:inline-block;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:12px;font-size:.7rem;margin-top:.6rem;font-weight:600}
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.section-title{font-size:1.3rem;font-weight:700;color:var(--accent);margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:.5rem}
+.section-title:first-child{margin-top:0}
+.diagram-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1rem 0;overflow-x:auto}
+
+.level-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem;margin:1rem 0}
+.level-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;position:relative;overflow:hidden}
+.level-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.level-card:nth-child(1)::before{background:#78716c}
+.level-card:nth-child(2)::before{background:#dc2626}
+.level-card:nth-child(3)::before{background:#b45309}
+.level-card:nth-child(4)::before{background:#16a34a}
+.level-card:nth-child(5)::before{background:#2563eb}
+.level-card .level-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.2rem}
+.level-card:nth-child(1) .level-label{color:#78716c}
+.level-card:nth-child(2) .level-label{color:#dc2626}
+.level-card:nth-child(3) .level-label{color:#b45309}
+.level-card:nth-child(4) .level-label{color:#16a34a}
+.level-card:nth-child(5) .level-label{color:#2563eb}
+.level-card h3{font-size:1rem;margin-bottom:.3rem}
+.level-card .desc{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:.5rem;font-style:italic}
+.level-card .section-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:.5rem;margin-bottom:.2rem}
+.level-card ul{list-style:none;padding:0;margin:0}
+.level-card li{font-size:.8rem;padding:.2rem 0;padding-left:1rem;position:relative;line-height:1.5}
+.level-card li::before{content:'→';position:absolute;left:0;color:var(--muted)}
+
+/* Power/Interest grid */
+.grid-container{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:0;margin:1rem 0;max-width:600px}
+.grid-cell{padding:1rem;border:1px solid var(--border);font-size:.82rem;line-height:1.5}
+.grid-cell h4{font-size:.85rem;margin-bottom:.3rem}
+.grid-cell:nth-child(1){background:#fef2f2;border-radius:10px 0 0 0}.grid-cell:nth-child(1) h4{color:#dc2626}
+.grid-cell:nth-child(2){background:#dcfce7;border-radius:0 10px 0 0}.grid-cell:nth-child(2) h4{color:#16a34a}
+.grid-cell:nth-child(3){background:#f5f5f4;border-radius:0 0 0 10px}.grid-cell:nth-child(3) h4{color:#78716c}
+.grid-cell:nth-child(4){background:#dbeafe;border-radius:0 0 10px 0}.grid-cell:nth-child(4) h4{color:#2563eb}
+.grid-labels{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);max-width:600px;margin-top:.3rem}
+.grid-y-label{font-size:.75rem;color:var(--muted);margin-bottom:.3rem}
+
+.callout{background:var(--accent-light);border:1px solid #e879f9;border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0}
+.callout-title{font-weight:700;font-size:.85rem;color:var(--accent);margin-bottom:.3rem}
+.callout p{font-size:.85rem;margin-bottom:.3rem}.callout p:last-child{margin-bottom:0}
+
+@media print{.sheet-header{background:#701a75!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.level-card::before,.grid-cell{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font-size:13px}.container{padding:1rem}.sheet-header .back{display:none}}
+@media(max-width:700px){.sheet-header{padding:1.5rem 1rem 1.2rem}.sheet-header h1{font-size:1.4rem}.container{padding:1.5rem 1rem 3rem}.level-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="sheet-header">
+  <a class="back" href="index.html">← Back to Cheat Sheets</a>
+  <h1>📡 Stakeholder Engagement Levels</h1>
+  <div class="subtitle">From Unaware to Leading — strategies to move stakeholders through each level</div>
+  <div class="domain-badge">People Domain (42%) · Stakeholder Management</div>
+</div>
+<div class="container">
+
+<div class="section-title" style="margin-top:0">📈 Engagement Level Progression</div>
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart LR
+  U["😶 <b>UNAWARE</b><br/>Doesn't know<br/>about the project"]
+  R["😠 <b>RESISTANT</b><br/>Aware but opposed<br/>to the project"]
+  N["😐 <b>NEUTRAL</b><br/>Aware but neither<br/>supportive nor opposed"]
+  S["😊 <b>SUPPORTIVE</b><br/>Aware and in favor<br/>of the project"]
+  L["🌟 <b>LEADING</b><br/>Actively engaged<br/>and championing"]
+
+  U -->|"Inform"| R
+  U -->|"Inform"| N
+  R -->|"Address concerns"| N
+  N -->|"Demonstrate value"| S
+  S -->|"Empower"| L
+
+  R -.->|"Can regress<br/>if ignored"| U
+  S -.->|"Can regress<br/>if neglected"| N
+
+  style U fill:#f5f5f4,stroke:#78716c
+  style R fill:#fef2f2,stroke:#dc2626
+  style N fill:#fef3c7,stroke:#b45309
+  style S fill:#dcfce7,stroke:#16a34a
+  style L fill:#dbeafe,stroke:#2563eb
+  </pre>
+</div>
+
+<div class="section-title">📋 Detailed Level Breakdown</div>
+<div class="level-grid">
+  <div class="level-card">
+    <div class="level-label">Level 1</div>
+    <h3>😶 Unaware</h3>
+    <div class="desc">Doesn't know the project exists or its potential impact on them.</div>
+    <div class="section-label">Characteristics</div>
+    <ul>
+      <li>No knowledge of the project</li>
+      <li>Cannot form an opinion yet</li>
+      <li>May be surprised by changes later</li>
+    </ul>
+    <div class="section-label">PM Strategy</div>
+    <ul>
+      <li>Identify them early (stakeholder analysis)</li>
+      <li>Communicate project existence and purpose</li>
+      <li>Explain how the project affects them</li>
+      <li>Move them to at least Neutral quickly</li>
+    </ul>
+  </div>
+
+  <div class="level-card">
+    <div class="level-label">Level 2</div>
+    <h3>😠 Resistant</h3>
+    <div class="desc">Aware of the project but opposed to it or its outcomes.</div>
+    <div class="section-label">Characteristics</div>
+    <ul>
+      <li>Actively or passively opposes the project</li>
+      <li>May spread negativity or block progress</li>
+      <li>Often fears change or loss of control</li>
+    </ul>
+    <div class="section-label">PM Strategy</div>
+    <ul>
+      <li>Understand their concerns (listen first!)</li>
+      <li>Address fears with facts and empathy</li>
+      <li>Involve them in decisions where possible</li>
+      <li>Find common ground and shared benefits</li>
+      <li>Don't ignore them — they won't go away</li>
+    </ul>
+  </div>
+
+  <div class="level-card">
+    <div class="level-label">Level 3</div>
+    <h3>😐 Neutral</h3>
+    <div class="desc">Aware of the project but neither supportive nor opposed.</div>
+    <div class="section-label">Characteristics</div>
+    <ul>
+      <li>Indifferent — "not my problem"</li>
+      <li>Won't actively help or hinder</li>
+      <li>May become resistant if negatively impacted</li>
+    </ul>
+    <div class="section-label">PM Strategy</div>
+    <ul>
+      <li>Demonstrate how the project benefits them</li>
+      <li>Keep them informed with regular updates</li>
+      <li>Invite participation in relevant decisions</li>
+      <li>Show quick wins to build momentum</li>
+    </ul>
+  </div>
+
+  <div class="level-card">
+    <div class="level-label">Level 4</div>
+    <h3>😊 Supportive</h3>
+    <div class="desc">Aware and in favor of the project and its outcomes.</div>
+    <div class="section-label">Characteristics</div>
+    <ul>
+      <li>Positive attitude toward the project</li>
+      <li>Willing to help when asked</li>
+      <li>Provides resources or political support</li>
+    </ul>
+    <div class="section-label">PM Strategy</div>
+    <ul>
+      <li>Keep them engaged and informed</li>
+      <li>Leverage their support for influence</li>
+      <li>Ask them to advocate to others</li>
+      <li>Don't take their support for granted</li>
+    </ul>
+  </div>
+
+  <div class="level-card">
+    <div class="level-label">Level 5</div>
+    <h3>🌟 Leading</h3>
+    <div class="desc">Actively engaged, championing the project, and influencing others.</div>
+    <div class="section-label">Characteristics</div>
+    <ul>
+      <li>Proactively advocates for the project</li>
+      <li>Influences other stakeholders positively</li>
+      <li>Removes organizational barriers</li>
+      <li>The project's biggest ally</li>
+    </ul>
+    <div class="section-label">PM Strategy</div>
+    <ul>
+      <li>Empower them as project champions</li>
+      <li>Give them visibility and recognition</li>
+      <li>Use them to influence resistant stakeholders</li>
+      <li>Keep them in the loop on key decisions</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-title">📊 Power/Interest Grid</div>
+<div class="grid-y-label">↑ High Power</div>
+<div class="grid-container">
+  <div class="grid-cell">
+    <h4>Keep Satisfied</h4>
+    <p>High power, low interest. Keep them happy and informed but don't overwhelm with details. Can become blockers if dissatisfied.</p>
+  </div>
+  <div class="grid-cell">
+    <h4>Manage Closely</h4>
+    <p>High power, high interest. Your most important stakeholders. Engage actively, communicate frequently, involve in decisions.</p>
+  </div>
+  <div class="grid-cell">
+    <h4>Monitor</h4>
+    <p>Low power, low interest. Minimal effort. Keep informed via general communications. Watch for changes in power or interest.</p>
+  </div>
+  <div class="grid-cell">
+    <h4>Keep Informed</h4>
+    <p>Low power, high interest. Provide regular updates. They can be great advocates. May gain power over time.</p>
+  </div>
+</div>
+<div class="grid-labels"><span>← Low Interest</span><span>High Interest →</span></div>
+
+<div class="callout">
+  <div class="callout-title">💡 Exam Tips</div>
+  <p><strong>The Stakeholder Engagement Assessment Matrix</strong> shows current vs desired engagement level for each stakeholder. The gap tells you where to focus.</p>
+  <p><strong>Engagement is continuous.</strong> It's not a one-time activity — reassess throughout the project.</p>
+  <p><strong>Resistant ≠ enemy.</strong> PMI wants you to understand and address concerns, not ignore or overpower resistant stakeholders.</p>
+  <p><strong>Not all stakeholders need to be Leading.</strong> The goal is to move each stakeholder to the level needed for project success.</p>
+  <p><strong>Salience Model</strong> classifies stakeholders by power, urgency, and legitimacy. Know it exists but Power/Interest grid is more commonly tested.</p>
+</div>
+
+</div>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#fae8ff',primaryTextColor:'#1c1917',primaryBorderColor:'#c026d3',lineColor:'#c026d3',fontFamily:'system-ui, sans-serif',fontSize:'13px'},flowchart:{htmlLabels:true,curve:'basis',padding:15}});
+</script>
+</body>
+</html>

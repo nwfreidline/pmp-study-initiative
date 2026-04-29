@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Approach Selector — PMP Cheat Sheet</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#ea580c;--accent-light:#fff7ed;--border:#e7e5e4;--card-bg:#fff;--pred:#2563eb;--agile:#16a34a;--hybrid:#7c3aed}
+html{font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+.sheet-header{background:linear-gradient(135deg,#7c2d12,#ea580c,#f97316);color:#fff;padding:2rem 2rem 1.5rem}
+.sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}.sheet-header .back:hover{color:#fff}
+.sheet-header h1{font-size:1.8rem;margin-top:.5rem}.sheet-header .subtitle{opacity:.85;font-size:.95rem;margin-top:.3rem}
+.sheet-header .domain-badge{display:inline-block;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:12px;font-size:.7rem;margin-top:.6rem;font-weight:600}
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.section-title{font-size:1.3rem;font-weight:700;color:var(--accent);margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:.5rem}
+.section-title:first-child{margin-top:0}
+.diagram-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1rem 0;overflow-x:auto}
+.compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+.compare-table th{padding:.6rem .8rem;text-align:left;font-size:.8rem;color:#fff}
+.compare-table th:nth-child(1){background:var(--muted);width:22%}
+.compare-table th:nth-child(2){background:var(--pred)}
+.compare-table th:nth-child(3){background:var(--agile)}
+.compare-table th:nth-child(4){background:var(--hybrid)}
+.compare-table td{padding:.5rem .8rem;border-bottom:1px solid var(--border);vertical-align:top}
+.compare-table tr:nth-child(even){background:#fafaf9}
+.compare-table td:first-child{font-weight:600;color:var(--fg)}
+.approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0}
+.approach-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;position:relative;overflow:hidden}
+.approach-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.approach-card:nth-child(1)::before{background:var(--pred)}
+.approach-card:nth-child(2)::before{background:var(--agile)}
+.approach-card:nth-child(3)::before{background:var(--hybrid)}
+.approach-card h3{font-size:1rem;margin-bottom:.5rem}
+.approach-card:nth-child(1) h3{color:var(--pred)}
+.approach-card:nth-child(2) h3{color:var(--agile)}
+.approach-card:nth-child(3) h3{color:var(--hybrid)}
+.approach-card .best{font-size:.82rem;font-weight:600;margin-bottom:.4rem}
+.approach-card ul{list-style:none;padding:0;margin:0}
+.approach-card li{font-size:.78rem;padding:.2rem 0;padding-left:1rem;position:relative;line-height:1.5}
+.approach-card li::before{content:'✓';position:absolute;left:0;color:var(--muted)}
+.callout{background:var(--accent-light);border:1px solid #fdba74;border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0}
+.callout-title{font-weight:700;font-size:.85rem;color:var(--accent);margin-bottom:.3rem}
+.callout p{font-size:.85rem;margin-bottom:.3rem}.callout p:last-child{margin-bottom:0}
+@media print{.sheet-header{background:#7c2d12!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.compare-table th{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font-size:13px}.container{padding:1rem}.sheet-header .back{display:none}}
+@media(max-width:700px){.sheet-header{padding:1.5rem 1rem 1.2rem}.sheet-header h1{font-size:1.4rem}.container{padding:1.5rem 1rem 3rem}.approach-grid{grid-template-columns:1fr}.compare-table{font-size:.75rem}}
+</style>
+</head>
+<body>
+<div class="sheet-header">
+  <a class="back" href="index.html">← Back to Cheat Sheets</a>
+  <h1>🛤️ Delivery Approach Selector</h1>
+  <div class="subtitle">Predictive vs Agile vs Hybrid — decision tree and comparison</div>
+  <div class="domain-badge">Process Domain · Methodology · Tailoring</div>
+</div>
+<div class="container">
+
+<div class="section-title" style="margin-top:0">🌳 Decision Tree: Which Approach?</div>
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart TD
+  START["🤔 Choosing a delivery approach"]
+  START --> Q1{"Are requirements<br/>well-defined and stable?"}
+  Q1 -->|"Yes — clear scope"| Q2{"Is the technology<br/>well-understood?"}
+  Q1 -->|"No — evolving"| Q3{"Is the customer<br/>available for feedback?"}
+  Q1 -->|"Partially"| HYBRID
+
+  Q2 -->|"Yes"| PRED["📐 <b>PREDICTIVE</b><br/>(Waterfall)"]
+  Q2 -->|"No — new tech"| HYBRID["🔀 <b>HYBRID</b>"]
+
+  Q3 -->|"Yes — engaged"| AGILE["🏃 <b>AGILE</b>"]
+  Q3 -->|"No — limited access"| HYBRID
+
+  PRED --> P_USE["Use when:<br/>• Construction, manufacturing<br/>• Regulatory/compliance heavy<br/>• Fixed-price contracts<br/>• Clear deliverables"]
+  AGILE --> A_USE["Use when:<br/>• Software development<br/>• Innovation/R&D<br/>• Rapid market changes<br/>• Customer collaboration"]
+  HYBRID --> H_USE["Use when:<br/>• Mixed certainty levels<br/>• Some components clear, others not<br/>• Organizational transition to agile<br/>• Large programs with sub-projects"]
+
+  style START fill:#fff7ed,stroke:#ea580c
+  style Q1 fill:#fef3c7,stroke:#b45309
+  style Q2 fill:#fef3c7,stroke:#b45309
+  style Q3 fill:#fef3c7,stroke:#b45309
+  style PRED fill:#dbeafe,stroke:#2563eb
+  style AGILE fill:#dcfce7,stroke:#16a34a
+  style HYBRID fill:#ede9fe,stroke:#7c3aed
+  style P_USE fill:#dbeafe,stroke:#2563eb
+  style A_USE fill:#dcfce7,stroke:#16a34a
+  style H_USE fill:#ede9fe,stroke:#7c3aed
+  </pre>
+</div>
+
+<div class="section-title">📊 Side-by-Side Comparison</div>
+<table class="compare-table">
+  <thead>
+    <tr><th>Dimension</th><th>📐 Predictive</th><th>🏃 Agile</th><th>🔀 Hybrid</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Requirements</td><td>Fixed upfront</td><td>Evolving, emergent</td><td>Mix of fixed and evolving</td></tr>
+    <tr><td>Planning</td><td>Detailed upfront</td><td>Just-in-time, iterative</td><td>High-level upfront + iterative detail</td></tr>
+    <tr><td>Delivery</td><td>Single delivery at end</td><td>Incremental every sprint</td><td>Phased with incremental components</td></tr>
+    <tr><td>Change</td><td>Formal change control</td><td>Backlog reprioritization</td><td>Both mechanisms</td></tr>
+    <tr><td>Customer involvement</td><td>Beginning and end</td><td>Continuous</td><td>Varies by component</td></tr>
+    <tr><td>Risk approach</td><td>Identify early, plan responses</td><td>Reduce through short iterations</td><td>Both strategies</td></tr>
+    <tr><td>Team structure</td><td>Functional, role-based</td><td>Cross-functional, self-organizing</td><td>Mixed</td></tr>
+    <tr><td>Documentation</td><td>Comprehensive</td><td>Just enough</td><td>Tailored per component</td></tr>
+    <tr><td>Success measure</td><td>Scope delivered on time/budget</td><td>Value delivered to customer</td><td>Both</td></tr>
+    <tr><td>Best for</td><td>Construction, compliance, hardware</td><td>Software, innovation, R&D</td><td>Large programs, transitions</td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">🏗️ When to Use Each</div>
+<div class="approach-grid">
+  <div class="approach-card">
+    <h3>📐 Predictive (Waterfall)</h3>
+    <div class="best">Best when certainty is HIGH</div>
+    <ul>
+      <li>Requirements are clear and stable</li>
+      <li>Technology is well-understood</li>
+      <li>Regulatory/compliance requirements</li>
+      <li>Fixed-price contracts</li>
+      <li>Sequential dependencies</li>
+      <li>Construction, manufacturing, infrastructure</li>
+      <li>Stakeholders want detailed plans upfront</li>
+    </ul>
+  </div>
+  <div class="approach-card">
+    <h3>🏃 Agile</h3>
+    <div class="best">Best when uncertainty is HIGH</div>
+    <ul>
+      <li>Requirements will evolve</li>
+      <li>Customer available for frequent feedback</li>
+      <li>Need to deliver value quickly</li>
+      <li>Innovation or R&D projects</li>
+      <li>Rapid market changes</li>
+      <li>Small, co-located teams</li>
+      <li>Software and digital products</li>
+    </ul>
+  </div>
+  <div class="approach-card">
+    <h3>🔀 Hybrid</h3>
+    <div class="best">Best when it's MIXED</div>
+    <ul>
+      <li>Some components clear, others uncertain</li>
+      <li>Organization transitioning to agile</li>
+      <li>Large programs with diverse sub-projects</li>
+      <li>Need predictive governance + agile delivery</li>
+      <li>Hardware + software integration</li>
+      <li>Stakeholders need predictive reporting</li>
+      <li>Most real-world projects are hybrid</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">💡 Exam Tips</div>
+  <p><strong>~50% of the exam involves agile or hybrid.</strong> Don't prep waterfall-only.</p>
+  <p><strong>Tailoring is key.</strong> PMI doesn't say one approach is always better — the right answer is "tailor to the project context."</p>
+  <p><strong>Hybrid is often the "safe" answer</strong> when the scenario describes mixed characteristics.</p>
+  <p><strong>"Iterative" ≠ "Agile".</strong> Iterative means repeating cycles. Incremental means delivering in pieces. Agile is both. Predictive can be iterative too (e.g., prototyping).</p>
+</div>
+
+<div class="section-title">🔄 Life Cycle Patterns</div>
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart LR
+  subgraph pred ["📐 PREDICTIVE"]
+    direction LR
+    P1["Initiate"] --> P2["Plan"] --> P3["Execute"] --> P4["Close"]
+  end
+  subgraph iter ["🔁 ITERATIVE"]
+    direction LR
+    I1["Cycle 1<br/>Build → Feedback"] --> I2["Cycle 2<br/>Refine → Feedback"] --> I3["Cycle 3<br/>Final → Deliver"]
+  end
+  subgraph incr ["📦 INCREMENTAL"]
+    direction LR
+    N1["Increment 1<br/>Feature A"] --> N2["Increment 2<br/>Feature B"] --> N3["Increment 3<br/>Feature C"]
+  end
+  subgraph agil ["🏃 AGILE (Iterative + Incremental)"]
+    direction LR
+    A1["Sprint 1<br/>Build + Deliver"] --> A2["Sprint 2<br/>Build + Deliver"] --> A3["Sprint 3<br/>Build + Deliver"]
+  end
+
+  style pred fill:#dbeafe,stroke:#2563eb
+  style iter fill:#fef3c7,stroke:#b45309
+  style incr fill:#fce7f3,stroke:#c026d3
+  style agil fill:#dcfce7,stroke:#16a34a
+  </pre>
+</div>
+
+</div>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#fff7ed',primaryTextColor:'#1c1917',primaryBorderColor:'#ea580c',lineColor:'#ea580c',fontFamily:'system-ui, sans-serif',fontSize:'13px'},flowchart:{htmlLabels:true,curve:'basis',padding:15}});
+</script>
+</body>
+</html>

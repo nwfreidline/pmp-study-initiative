@@ -2,13 +2,13 @@
 
 A free, comprehensive, interactive study guide for the **PMP (Project Management Professional)** certification exam.
 
-**[→ Start Studying](https://nwfreidline.github.io/pm-study-book/)** · **[→ Take the Quiz](https://nwfreidline.github.io/pm-study-book/quiz.html)**
+**[→ Start Studying](https://nwfreidline.github.io/pm-study-book/)** · **[→ Take the Quiz](https://nwfreidline.github.io/pm-study-book/quiz.html)** · **[→ Cheat Sheets](https://nwfreidline.github.io/pm-study-book/cheat-sheets/)**
 
 ---
 
 ## What Is This?
 
-A self-contained HTML study book and quiz app covering everything you need to pass the PMP exam. No account required, no paywall, no ads. Just open it in a browser and start reading.
+A self-contained HTML study book, quiz app, and visual cheat sheet collection covering everything you need to pass the PMP exam. No account required, no paywall, no ads. Just open it in a browser and start reading.
 
 Built from the PMBOK Guide 7th Edition, the PMI Exam Content Outline, and the most recommended community study resources.
 
@@ -33,6 +33,27 @@ Built from the PMBOK Guide 7th Edition, the PMI Exam Content Outline, and the mo
 
 Plus a **50-question diagnostic quiz** with per-question explanations and domain scoring.
 
+## 📋 Visual Cheat Sheets (NEW)
+
+12 visual quick-reference guides for last-stage exam preparation, built with interactive Mermaid.js diagrams. Print-friendly.
+
+**[→ Browse All Cheat Sheets](https://nwfreidline.github.io/pm-study-book/cheat-sheets/)**
+
+| # | Cheat Sheet | Key Topics |
+|---|-------------|------------|
+| 1 | EVM Formula Map | All EVM formulas, flowchart, EAC variations, interpretation guide |
+| 2 | 12 Principles Mind Map | PMBOK 7 principles grouped by People/Approach/Outcome |
+| 3 | PMI Mindset Decision Tree | Scenario question flowchart, 10 golden rules, common traps |
+| 4 | Risk Response Strategy Grid | Threats vs Opportunities, all response strategies |
+| 5 | Conflict Resolution Quick Pick | 5 techniques ranked by PMI preference with scenarios |
+| 6 | Scrum Sprint Cycle | Roles, events, artifacts, timeboxes, agile metrics |
+| 7 | Delivery Approach Selector | Predictive vs Agile vs Hybrid decision tree |
+| 8 | Procurement Contract Spectrum | Contract types ranked by buyer/seller risk, PTA formula |
+| 9 | Tuckman's Team Stages | 5 stages with PM actions and leadership style |
+| 10 | ECO Domain Overview | All 3 domains, 35 tasks, weightings |
+| 11 | Stakeholder Engagement Levels | Unaware → Leading progression, Power/Interest grid |
+| 12 | Brain Dump Reference Card | Everything to write on scratch paper in 5 minutes |
+
 ## Features
 
 **Study Book:**
@@ -52,6 +73,12 @@ Plus a **50-question diagnostic quiz** with per-question explanations and domain
 - Full review of incorrect answers with explanations
 - Retake functionality
 
+**Cheat Sheets:**
+- 12 visual quick-reference guides with Mermaid.js diagrams
+- Flowcharts, mind maps, decision trees, and color-coded cards
+- Print-friendly CSS for offline study
+- Self-contained HTML — works in any browser
+
 ## How to Use
 
 ### Online (Recommended)
@@ -60,14 +87,16 @@ Visit **[nwfreidline.github.io/pm-study-book](https://nwfreidline.github.io/pm-s
 ### Offline
 1. Download or clone this repo
 2. Open `index.html` in any browser
-3. All 5 files must be in the same folder
 
 ```
-index.html            ← Study book reader
-quiz.html             ← Quiz app
-pages.js              ← Study content (Ch 1-8)
-pages-continued.js    ← Study content (Ch 8-13)
-quiz-data.js          ← Quiz questions
+index.html              ← Study book reader
+quiz.html               ← Quiz app
+pages.js                ← Study content (Ch 1-8)
+pages-continued.js      ← Study content (Ch 8-13)
+quiz-data.js            ← Quiz questions
+cheat-sheets/           ← 12 visual cheat sheets (open index.html)
+docs/                   ← Reference materials (formulas, agile, study plan)
+week-1/                 ← Week 1 detailed study materials (markdown)
 ```
 
 ## Exam Quick Reference

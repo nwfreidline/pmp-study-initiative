@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMI Mindset Decision Tree — PMP Cheat Sheet</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#16a34a;
+  --accent-light:#dcfce7;--border:#e7e5e4;--card-bg:#fff;
+}
+html{font-size:16px}
+body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+
+.sheet-header{background:linear-gradient(135deg,#14532d,#16a34a,#059669);color:#fff;padding:2rem 2rem 1.5rem}
+.sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}
+.sheet-header .back:hover{color:#fff}
+.sheet-header h1{font-size:1.8rem;margin-top:.5rem}
+.sheet-header .subtitle{opacity:.85;font-size:.95rem;margin-top:.3rem}
+.sheet-header .domain-badge{display:inline-block;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:12px;font-size:.7rem;margin-top:.6rem;font-weight:600}
+
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+.section-title{font-size:1.3rem;font-weight:700;color:var(--accent);margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:.5rem}
+.section-title:first-child{margin-top:0}
+
+.diagram-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1rem 0;overflow-x:auto}
+
+/* Golden rule banner */
+.golden-rule{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:12px;padding:1.5rem 2rem;text-align:center;margin:1rem 0 2rem}
+.golden-rule .emoji{font-size:2rem;margin-bottom:.3rem}
+.golden-rule h2{font-size:1.2rem;color:#92400e;margin-bottom:.3rem}
+.golden-rule p{font-size:.95rem;color:#78350f}
+
+/* Rules grid */
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem;margin:1rem 0}
+.rule-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;position:relative;overflow:hidden}
+.rule-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px}
+.rule-card:nth-child(1)::before{background:#16a34a}
+.rule-card:nth-child(2)::before{background:#2563eb}
+.rule-card:nth-child(3)::before{background:#7c3aed}
+.rule-card:nth-child(4)::before{background:#e11d48}
+.rule-card:nth-child(5)::before{background:#ea580c}
+.rule-card:nth-child(6)::before{background:#0891b2}
+.rule-card:nth-child(7)::before{background:#c026d3}
+.rule-card:nth-child(8)::before{background:#4f46e5}
+.rule-card:nth-child(9)::before{background:#0d9488}
+.rule-card:nth-child(10)::before{background:#b45309}
+.rule-card .rule-num{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.2rem}
+.rule-card h3{font-size:.95rem;margin-bottom:.5rem}
+.rule-card .instead-table{width:100%;font-size:.78rem;border-collapse:collapse}
+.rule-card .instead-table td{padding:.3rem .4rem;border-bottom:1px solid var(--border);vertical-align:top}
+.rule-card .instead-table td:first-child{color:var(--muted);text-decoration:line-through;width:45%}
+.rule-card .instead-table td:last-child{color:var(--accent);font-weight:600}
+.rule-card .instead-table tr:last-child td{border-bottom:none}
+
+/* Traps */
+.trap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin:1rem 0}
+.trap-card{background:#fff5f5;border:1px solid #fecaca;border-radius:10px;padding:1rem 1.2rem}
+.trap-card h4{font-size:.85rem;color:#dc2626;margin-bottom:.4rem;display:flex;align-items:center;gap:.3rem}
+.trap-card p{font-size:.82rem;color:var(--fg);line-height:1.5}
+.trap-card .correct{color:var(--accent);font-weight:600;display:block;margin-top:.3rem}
+
+.callout{background:var(--accent-light);border:1px solid #86efac;border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0}
+.callout-title{font-weight:700;font-size:.85rem;color:var(--accent);margin-bottom:.3rem}
+.callout p{font-size:.85rem;margin-bottom:.3rem}
+.callout p:last-child{margin-bottom:0}
+
+@media print{
+  .sheet-header{background:#14532d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rule-card::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-size:13px}
+  .container{padding:1rem}
+  .sheet-header .back{display:none}
+}
+@media(max-width:700px){
+  .sheet-header{padding:1.5rem 1rem 1.2rem}
+  .sheet-header h1{font-size:1.4rem}
+  .container{padding:1.5rem 1rem 3rem}
+  .rules-grid,.trap-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="sheet-header">
+  <a class="back" href="index.html">← Back to Cheat Sheets</a>
+  <h1>🧠 PMI Mindset Decision Tree</h1>
+  <div class="subtitle">"What would PMI want me to do?" — The framework for answering every scenario question</div>
+  <div class="domain-badge">All Domains · Exam Strategy · Most Important Cheat Sheet</div>
+</div>
+
+<div class="container">
+
+<!-- ============ GOLDEN RULE ============ -->
+<div class="golden-rule">
+  <div class="emoji">⭐</div>
+  <h2>The Golden Rule</h2>
+  <p>Always ask: <strong>"What would PMI want me to do?"</strong> — Not what you'd do in real life. Not what's fastest. What does PMI's framework say is RIGHT?</p>
+</div>
+
+<!-- ============ MAIN DECISION TREE ============ -->
+<div class="section-title" style="margin-top:0">🌳 Scenario Question Decision Tree</div>
+
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart TD
+  START["📋 Read the scenario question"]
+  START --> LAST["Read the LAST sentence first<br/><i>It tells you what's being asked</i>"]
+  LAST --> TYPE{"What type of<br/>situation is it?"}
+
+  TYPE -->|"Ethical issue"| ETHICS["🛡️ <b>Ethics First</b><br/>Report it. Always.<br/>Honesty > loyalty > convenience"]
+  TYPE -->|"Change requested"| CHANGE["📝 <b>Follow Change Control</b><br/>1. Assess impact<br/>2. Submit change request<br/>3. CCB reviews<br/>4. Update plans if approved"]
+  TYPE -->|"Problem discovered"| PROBLEM["🔍 <b>Assess Before Acting</b><br/>1. Identify the problem<br/>2. Gather information<br/>3. Find root cause<br/>4. Evaluate options<br/>5. THEN take action"]
+  TYPE -->|"Team conflict"| CONFLICT["🤝 <b>Facilitate, Don't Dictate</b><br/>Collaborate/Problem Solve<br/>is almost always the answer"]
+  TYPE -->|"Stakeholder issue"| STAKE["📡 <b>Engage & Communicate</b><br/>Understand their needs<br/>Manage expectations<br/>Build relationships"]
+  TYPE -->|"Risk identified"| RISK["⚠️ <b>Be Proactive</b><br/>Analyze the risk<br/>Plan a response<br/>Update the risk register"]
+  TYPE -->|"Methodology question"| METHOD["🛤️ <b>Tailor to Context</b><br/>No one-size-fits-all<br/>Consider project characteristics<br/>Hybrid is often valid"]
+
+  ETHICS --> VERIFY{"Does your answer<br/>reflect servant leadership?"}
+  CHANGE --> VERIFY
+  PROBLEM --> VERIFY
+  CONFLICT --> VERIFY
+  STAKE --> VERIFY
+  RISK --> VERIFY
+  METHOD --> VERIFY
+
+  VERIFY -->|"Yes"| GOOD["✅ <b>Likely correct!</b><br/>Facilitate > Direct<br/>Empower > Control<br/>Assess > React"]
+  VERIFY -->|"No"| RETHINK["🔄 <b>Reconsider</b><br/>PMI prefers the answer that<br/>serves the team and follows process"]
+
+  style START fill:#dcfce7,stroke:#16a34a,color:#14532d
+  style TYPE fill:#fef3c7,stroke:#b45309,color:#78350f
+  style ETHICS fill:#ffe4e6,stroke:#e11d48,color:#881337
+  style CHANGE fill:#dbeafe,stroke:#2563eb,color:#1e3a5f
+  style PROBLEM fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+  style CONFLICT fill:#fef3c7,stroke:#b45309,color:#78350f
+  style STAKE fill:#fce7f3,stroke:#c026d3,color:#701a75
+  style RISK fill:#fff7ed,stroke:#ea580c,color:#7c2d12
+  style METHOD fill:#ecfdf5,stroke:#0d9488,color:#134e4a
+  style VERIFY fill:#f5f5f4,stroke:#78716c,color:#1c1917
+  style GOOD fill:#dcfce7,stroke:#16a34a,color:#14532d
+  style RETHINK fill:#fef3c7,stroke:#b45309,color:#78350f
+  </pre>
+</div>
+
+<!-- ============ CHANGE CONTROL FLOW ============ -->
+<div class="section-title">📝 Change Control Process (Memorize This Flow)</div>
+
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart LR
+  A["Change<br/>identified"] --> B["Assess<br/>impact"]
+  B --> C["Submit<br/>change request"]
+  C --> D["CCB<br/>reviews"]
+  D -->|"Approved"| E["Update plans<br/>& baselines"]
+  D -->|"Rejected"| F["Document<br/>decision"]
+  D -->|"Deferred"| G["Log for<br/>later review"]
+  E --> H["Communicate<br/>to stakeholders"]
+  F --> H
+  G --> H
+
+  style A fill:#dbeafe,stroke:#2563eb
+  style B fill:#ede9fe,stroke:#7c3aed
+  style C fill:#fef3c7,stroke:#b45309
+  style D fill:#fce7f3,stroke:#c026d3
+  style E fill:#dcfce7,stroke:#16a34a
+  style F fill:#ffe4e6,stroke:#e11d48
+  style G fill:#fff7ed,stroke:#ea580c
+  style H fill:#dcfce7,stroke:#16a34a
+  </pre>
+</div>
+
+<div class="callout">
+  <div class="callout-title">💡 Exam Tip</div>
+  <p>The answer is almost NEVER "make the change immediately." It's always "assess the impact" or "submit a change request." Even for small changes — PMI says follow the process.</p>
+</div>
+
+<!-- ============ 10 RULES ============ -->
+<div class="section-title">📜 The 10 PMI Mindset Rules</div>
+
+<div class="rules-grid">
+  <div class="rule-card">
+    <div class="rule-num">Rule 1</div>
+    <h3>🤲 Servant Leadership Is the Default</h3>
+    <table class="instead-table">
+      <tr><td>Tell the team what to do</td><td>Facilitate a discussion</td></tr>
+      <tr><td>Make decisions for the team</td><td>Empower the team to decide</td></tr>
+      <tr><td>Solve problems yourself</td><td>Coach the team to find solutions</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 2</div>
+    <h3>📋 Always Follow the Process</h3>
+    <table class="instead-table">
+      <tr><td>Make the change immediately</td><td>Submit a change request</td></tr>
+      <tr><td>Approve the change yourself</td><td>Have the CCB review it</td></tr>
+      <tr><td>Skip analysis for small changes</td><td>Assess impact regardless</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 3</div>
+    <h3>🔍 Assess Before Acting</h3>
+    <table class="instead-table">
+      <tr><td>Jump to a solution</td><td>Analyze the situation first</td></tr>
+      <tr><td>Fix the symptom</td><td>Find the root cause</td></tr>
+      <tr><td>Act on assumptions</td><td>Gather data and facts</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 4</div>
+    <h3>🚫 Never Gold Plate</h3>
+    <table class="instead-table">
+      <tr><td>Add extra features "for free"</td><td>Deliver only what's in scope</td></tr>
+      <tr><td>Exceed requirements to impress</td><td>Meet requirements precisely</td></tr>
+      <tr><td>Assume the customer wants more</td><td>Ask the customer what they need</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 5</div>
+    <h3>📢 Communicate Proactively</h3>
+    <table class="instead-table">
+      <tr><td>Wait for people to ask</td><td>Share information proactively</td></tr>
+      <tr><td>Hide bad news</td><td>Report transparently</td></tr>
+      <tr><td>Assume people know</td><td>Confirm understanding</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 6</div>
+    <h3>📡 Engage Stakeholders Early & Often</h3>
+    <table class="instead-table">
+      <tr><td>Involve stakeholders at the end</td><td>Engage from the start</td></tr>
+      <tr><td>Ignore resistant stakeholders</td><td>Understand their concerns</td></tr>
+      <tr><td>Communicate only when required</td><td>Maintain continuous engagement</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 7</div>
+    <h3>🛡️ Ethics First, Always</h3>
+    <table class="instead-table">
+      <tr><td>Cover up a mistake</td><td>Report it honestly</td></tr>
+      <tr><td>Accept a gift from a vendor</td><td>Decline and report it</td></tr>
+      <tr><td>Falsify reports to look good</td><td>Report actual status</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 8</div>
+    <h3>📜 The Project Charter Is Sacred</h3>
+    <table class="instead-table">
+      <tr><td>Start work without a charter</td><td>Get the charter signed first</td></tr>
+      <tr><td>Accept verbal authorization</td><td>Require formal documentation</td></tr>
+      <tr><td>Let the sponsor bypass the PM</td><td>Reference the charter authority</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 9</div>
+    <h3>⚠️ Risk Management Is Proactive</h3>
+    <table class="instead-table">
+      <tr><td>Deal with risks when they happen</td><td>Identify and plan responses early</td></tr>
+      <tr><td>Ignore low-probability risks</td><td>Document all identified risks</td></tr>
+      <tr><td>Only think about threats</td><td>Also identify opportunities</td></tr>
+    </table>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">Rule 10</div>
+    <h3>📝 Document Everything</h3>
+    <table class="instead-table">
+      <tr><td>Rely on verbal agreements</td><td>Document decisions formally</td></tr>
+      <tr><td>Skip lessons learned</td><td>Capture lessons throughout</td></tr>
+      <tr><td>Trust memory for decisions</td><td>Update project artifacts</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============ COMMON TRAPS ============ -->
+<div class="section-title">🪤 Common Exam Traps</div>
+
+<div class="trap-grid">
+  <div class="trap-card">
+    <h4>🪤 The "Real World" Trap</h4>
+    <p>You know what you'd do in real life — but the exam tests what <strong>PMI</strong> says to do. Real-world shortcuts are wrong answers.</p>
+    <span class="correct">→ Always think "What would PMI want?"</span>
+  </div>
+  <div class="trap-card">
+    <h4>🪤 The "Escalate Immediately" Trap</h4>
+    <p>Escalating to the sponsor or management is tempting but usually premature. PMI wants you to handle it first.</p>
+    <span class="correct">→ Assess and attempt resolution before escalating</span>
+  </div>
+  <div class="trap-card">
+    <h4>🪤 The "Take Action Now" Trap</h4>
+    <p>Action-oriented answers feel right but skip the assessment step. PMI always wants analysis first.</p>
+    <span class="correct">→ Analyze → Plan → Act (in that order)</span>
+  </div>
+  <div class="trap-card">
+    <h4>🪤 The "Authority" Trap</h4>
+    <p>Answers where the PM makes unilateral decisions sound decisive but violate servant leadership.</p>
+    <span class="correct">→ Facilitate team decisions, don't dictate</span>
+  </div>
+  <div class="trap-card">
+    <h4>🪤 The "Ignore and Continue" Trap</h4>
+    <p>Ignoring a problem, risk, or stakeholder concern is never the right answer on the PMP exam.</p>
+    <span class="correct">→ Address every issue through the proper process</span>
+  </div>
+  <div class="trap-card">
+    <h4>🪤 The "Overtime" Trap</h4>
+    <p>Asking the team to work overtime to absorb a change sounds practical but violates team well-being principles.</p>
+    <span class="correct">→ Follow change control, adjust the plan properly</span>
+  </div>
+</div>
+
+<!-- ============ EXAM DAY QUICK REFERENCE ============ -->
+<div class="section-title">⚡ Exam Day Quick Reference</div>
+
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart LR
+  subgraph timing ["⏱️ TIMING"]
+    T1["180 questions<br/>230 minutes"]
+    T2["~76 sec<br/>per question"]
+    T3["Flag & move on<br/>if > 2 min"]
+  end
+
+  subgraph breaks ["☕ BREAKS"]
+    B1["Break 1<br/>After Q60"]
+    B2["Break 2<br/>After Q120"]
+    B3["Take BOTH<br/>breaks!"]
+  end
+
+  subgraph strategy ["🎯 STRATEGY"]
+    S1["Read last<br/>sentence first"]
+    S2["Eliminate 2<br/>wrong answers"]
+    S3["Choose between<br/>remaining 2"]
+  end
+
+  style timing fill:#dbeafe,stroke:#2563eb
+  style breaks fill:#dcfce7,stroke:#16a34a
+  style strategy fill:#fef3c7,stroke:#b45309
+  </pre>
+</div>
+
+<div class="callout">
+  <div class="callout-title">🧠 The 3-Second Filter</div>
+  <p>For every answer choice, ask these three questions in order:</p>
+  <p>1. <strong>Is it ethical?</strong> If not, eliminate it.</p>
+  <p>2. <strong>Does it follow the process?</strong> If not, eliminate it.</p>
+  <p>3. <strong>Does it serve the team/stakeholders?</strong> If yes, it's probably correct.</p>
+</div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#dcfce7',
+      primaryTextColor: '#1c1917',
+      primaryBorderColor: '#16a34a',
+      lineColor: '#16a34a',
+      secondaryColor: '#dbeafe',
+      tertiaryColor: '#ede9fe',
+      fontFamily: 'system-ui, sans-serif',
+      fontSize: '13px'
+    },
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      padding: 15,
+      nodeSpacing: 25,
+      rankSpacing: 40
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procurement Contract Spectrum — PMP Cheat Sheet</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#4f46e5;--accent-light:#eef2ff;--border:#e7e5e4;--card-bg:#fff;--buyer:#dc2626;--seller:#2563eb}
+html{font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+.sheet-header{background:linear-gradient(135deg,#312e81,#4f46e5,#6366f1);color:#fff;padding:2rem 2rem 1.5rem}
+.sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}.sheet-header .back:hover{color:#fff}
+.sheet-header h1{font-size:1.8rem;margin-top:.5rem}.sheet-header .subtitle{opacity:.85;font-size:.95rem;margin-top:.3rem}
+.sheet-header .domain-badge{display:inline-block;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:12px;font-size:.7rem;margin-top:.6rem;font-weight:600}
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.section-title{font-size:1.3rem;font-weight:700;color:var(--accent);margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:.5rem}
+.section-title:first-child{margin-top:0}
+.diagram-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1rem 0;overflow-x:auto}
+
+/* Spectrum bar */
+.spectrum-container{margin:1.5rem 0}
+.spectrum-labels{display:flex;justify-content:space-between;font-size:.8rem;font-weight:700;margin-bottom:.5rem}
+.spectrum-labels .buyer-label{color:var(--buyer)}
+.spectrum-labels .seller-label{color:var(--seller)}
+.spectrum-bar{display:flex;border-radius:10px;overflow:hidden;font-size:.72rem;font-weight:600;text-align:center;color:#fff}
+.spectrum-bar div{padding:.7rem .3rem;flex:1}
+.spectrum-bar .s1{background:#dc2626}.spectrum-bar .s2{background:#ea580c}.spectrum-bar .s3{background:#b45309}
+.spectrum-bar .s4{background:#78716c}.spectrum-bar .s5{background:#4f46e5}.spectrum-bar .s6{background:#2563eb}.spectrum-bar .s7{background:#1d4ed8}
+.risk-arrows{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:.4rem;padding:0 .3rem}
+
+/* Contract cards */
+.contract-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;margin:1rem 0}
+.c-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;position:relative;overflow:hidden}
+.c-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.c-card.cp::before{background:var(--buyer)}
+.c-card.tm::before{background:var(--muted)}
+.c-card.fp::before{background:var(--seller)}
+.c-card h3{font-size:.95rem;margin-bottom:.15rem}
+.c-card .abbr{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+.c-card.cp .abbr{color:var(--buyer)}.c-card.tm .abbr{color:var(--muted)}.c-card.fp .abbr{color:var(--seller)}
+.c-card .desc{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:.5rem}
+.c-card .risk-bar{display:flex;gap:.3rem;font-size:.7rem;margin-bottom:.4rem}
+.c-card .risk-bar span{padding:.15rem .5rem;border-radius:8px;font-weight:600}
+.c-card .risk-bar .buyer-risk{background:#fef2f2;color:var(--buyer)}
+.c-card .risk-bar .seller-risk{background:#eff6ff;color:var(--seller)}
+.c-card .example{font-size:.78rem;background:#f5f5f4;border-radius:6px;padding:.5rem .7rem;line-height:1.5}
+
+.callout{background:var(--accent-light);border:1px solid #a5b4fc;border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0}
+.callout-title{font-weight:700;font-size:.85rem;color:var(--accent);margin-bottom:.3rem}
+.callout p{font-size:.85rem;margin-bottom:.3rem}.callout p:last-child{margin-bottom:0}
+
+.pta-box{background:var(--card-bg);border:2px solid var(--accent);border-radius:10px;padding:1.5rem;margin:1rem 0;text-align:center}
+.pta-box h3{color:var(--accent);margin-bottom:.5rem}
+.pta-box .formula{font-family:'Consolas',monospace;font-size:1.2rem;font-weight:700;color:var(--accent);background:var(--accent-light);padding:.5rem 1rem;border-radius:6px;display:inline-block;margin:.5rem 0}
+.pta-box .note{font-size:.82rem;color:var(--muted);margin-top:.5rem;line-height:1.5}
+
+@media print{.sheet-header{background:#312e81!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.spectrum-bar div{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font-size:13px}.container{padding:1rem}.sheet-header .back{display:none}}
+@media(max-width:700px){.sheet-header{padding:1.5rem 1rem 1.2rem}.sheet-header h1{font-size:1.4rem}.container{padding:1.5rem 1rem 3rem}.contract-grid{grid-template-columns:1fr}.spectrum-bar{flex-direction:column}.spectrum-bar div{padding:.5rem}}
+</style>
+</head>
+<body>
+<div class="sheet-header">
+  <a class="back" href="index.html">← Back to Cheat Sheets</a>
+  <h1>📝 Procurement Contract Spectrum</h1>
+  <div class="subtitle">Contract types ranked by buyer/seller risk — from Cost Plus to Fixed Price</div>
+  <div class="domain-badge">Process Domain · Procurement Management</div>
+</div>
+<div class="container">
+
+<div class="section-title" style="margin-top:0">📊 Risk Spectrum</div>
+<div class="spectrum-container">
+  <div class="spectrum-labels">
+    <span class="buyer-label">🔴 Highest Buyer Risk</span>
+    <span class="seller-label">🔵 Highest Seller Risk</span>
+  </div>
+  <div class="spectrum-bar">
+    <div class="s1">CPPC</div>
+    <div class="s2">CPFF</div>
+    <div class="s3">CPIF</div>
+    <div class="s4">T&M</div>
+    <div class="s5">FPIF</div>
+    <div class="s6">FP-EPA</div>
+    <div class="s7">FFP</div>
+  </div>
+  <div class="risk-arrows">
+    <span>← Buyer pays all overruns</span>
+    <span>Seller absorbs all overruns →</span>
+  </div>
+</div>
+
+<div class="section-title">💰 Cost-Reimbursable Contracts (Buyer Risk)</div>
+<div class="contract-grid">
+  <div class="c-card cp">
+    <div class="abbr">🔴 Highest Buyer Risk</div>
+    <h3>CPPC — Cost Plus Percentage of Cost</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: Very High</span><span class="seller-risk">Seller: Very Low</span></div>
+    <div class="desc">Buyer pays all costs + a percentage fee on top. The more the seller spends, the more they earn. <strong>No incentive to control costs.</strong></div>
+    <div class="example"><strong>Rarely used.</strong> Some government contracts. PMI considers this the worst contract type for the buyer.</div>
+  </div>
+  <div class="c-card cp">
+    <div class="abbr">🔴 High Buyer Risk</div>
+    <h3>CPFF — Cost Plus Fixed Fee</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: High</span><span class="seller-risk">Seller: Low</span></div>
+    <div class="desc">Buyer pays all costs + a fixed fee (doesn't change with cost overruns). Seller has some incentive to control costs since fee doesn't grow.</div>
+    <div class="example"><strong>Example:</strong> R&D project where scope is unclear. Fee is $50K regardless of final cost.</div>
+  </div>
+  <div class="c-card cp">
+    <div class="abbr">🟠 Medium-High Buyer Risk</div>
+    <h3>CPIF — Cost Plus Incentive Fee</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: Medium-High</span><span class="seller-risk">Seller: Medium-Low</span></div>
+    <div class="desc">Buyer pays costs + fee adjusted by performance. If seller beats target cost, they earn a bonus. If over, fee is reduced. Shared risk via a sharing ratio.</div>
+    <div class="example"><strong>Example:</strong> Target cost $100K, sharing ratio 80/20. If actual cost is $90K, seller gets bonus from the $10K savings.</div>
+  </div>
+  <div class="c-card cp">
+    <div class="abbr">🟠 Medium Buyer Risk</div>
+    <h3>CPAF — Cost Plus Award Fee</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: Medium</span><span class="seller-risk">Seller: Medium</span></div>
+    <div class="desc">Buyer pays costs + an award fee based on subjective performance evaluation. Fee amount determined by a fee evaluation board.</div>
+    <div class="example"><strong>Key difference from CPIF:</strong> Award fee is subjective (quality, timeliness), not formula-based. Buyer has more control.</div>
+  </div>
+</div>
+
+<div class="section-title">⚖️ Middle Ground</div>
+<div class="contract-grid">
+  <div class="c-card tm">
+    <div class="abbr">⚖️ Shared Risk</div>
+    <h3>T&M — Time and Materials</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: Medium</span><span class="seller-risk">Seller: Medium</span></div>
+    <div class="desc">Buyer pays hourly/daily rates + materials. Open-ended — no fixed total price. Risk is shared but buyer has exposure if work takes longer than expected.</div>
+    <div class="example"><strong>Example:</strong> Consulting engagement at $200/hr. Often used when scope can't be defined upfront. Should include a "not to exceed" ceiling.</div>
+  </div>
+</div>
+
+<div class="section-title">🔵 Fixed-Price Contracts (Seller Risk)</div>
+<div class="contract-grid">
+  <div class="c-card fp">
+    <div class="abbr">🔵 Medium-Low Seller Risk</div>
+    <h3>FPIF — Fixed Price Incentive Fee</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: Medium-Low</span><span class="seller-risk">Seller: Medium-High</span></div>
+    <div class="desc">Fixed price with incentive adjustments. If seller beats target cost, they share the savings. If over, they share the overrun. Has a ceiling price the buyer won't exceed.</div>
+    <div class="example"><strong>This is where PTA applies.</strong> Point of Total Assumption = the cost point where seller absorbs 100% of overruns.</div>
+  </div>
+  <div class="c-card fp">
+    <div class="abbr">🔵 High Seller Risk</div>
+    <h3>FP-EPA — Fixed Price with Economic Price Adjustment</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: Low</span><span class="seller-risk">Seller: High</span></div>
+    <div class="desc">Fixed price with provisions for inflation or cost-of-living adjustments. Used for multi-year contracts where economic conditions may change.</div>
+    <div class="example"><strong>Example:</strong> 3-year construction contract with annual price adjustments tied to CPI (Consumer Price Index).</div>
+  </div>
+  <div class="c-card fp">
+    <div class="abbr">🔵 Highest Seller Risk</div>
+    <h3>FFP — Firm Fixed Price</h3>
+    <div class="risk-bar"><span class="buyer-risk">Buyer: Lowest</span><span class="seller-risk">Seller: Highest</span></div>
+    <div class="desc">Price is set and doesn't change regardless of seller's costs. Seller absorbs all overruns. <strong>Most common contract type.</strong></div>
+    <div class="example"><strong>Example:</strong> "Build this website for $50,000." If it costs the seller $60K, they eat the $10K loss. Best when scope is well-defined.</div>
+  </div>
+</div>
+
+<div class="section-title">💰 PTA Formula (FPIF Only)</div>
+<div class="pta-box">
+  <h3>Point of Total Assumption</h3>
+  <div class="formula">PTA = ((Ceiling Price − Target Price) / Buyer's Share Ratio) + Target Cost</div>
+  <div class="note">The cost point above which the <strong>seller absorbs 100%</strong> of additional costs.<br/>Only applies to <strong>Fixed Price Incentive Fee (FPIF)</strong> contracts.</div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">💡 Exam Tips</div>
+  <p><strong>Memory trick:</strong> Cost Plus = Buyer risk (buyer pays costs). Fixed Price = Seller risk (seller eats overruns).</p>
+  <p><strong>FFP is most common</strong> and preferred when scope is clear. It's the simplest and lowest risk for the buyer.</p>
+  <p><strong>T&M should have a ceiling.</strong> Without a "not to exceed" clause, T&M is essentially open-ended buyer risk.</p>
+  <p><strong>CPPC is the worst for buyers</strong> — the seller is incentivized to spend MORE. Rarely used in practice.</p>
+  <p><strong>PTA only applies to FPIF.</strong> If the exam asks about PTA, it's always in the context of a fixed-price incentive fee contract.</p>
+</div>
+
+</div>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#eef2ff',primaryTextColor:'#1c1917',primaryBorderColor:'#4f46e5',lineColor:'#4f46e5',fontFamily:'system-ui, sans-serif',fontSize:'13px'},flowchart:{htmlLabels:true,curve:'basis',padding:15}});
+</script>
+</body>
+</html>

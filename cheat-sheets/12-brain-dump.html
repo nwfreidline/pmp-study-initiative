@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brain Dump Reference Card — PMP Cheat Sheet</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#dc2626;--accent-light:#fef2f2;--border:#e7e5e4;--card-bg:#fff}
+html{font-size:15px}body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+.sheet-header{background:linear-gradient(135deg,#7f1d1d,#dc2626,#ef4444);color:#fff;padding:2rem 2rem 1.5rem}
+.sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}.sheet-header .back:hover{color:#fff}
+.sheet-header h1{font-size:1.8rem;margin-top:.5rem}.sheet-header .subtitle{opacity:.85;font-size:.95rem;margin-top:.3rem}
+.sheet-header .domain-badge{display:inline-block;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:12px;font-size:.7rem;margin-top:.6rem;font-weight:600}
+.container{max-width:1200px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+
+.timer-banner{background:linear-gradient(90deg,#fef2f2,#fff);border:2px solid #fca5a5;border-radius:12px;padding:1rem 1.5rem;text-align:center;margin:1rem 0 1.5rem}
+.timer-banner .big{font-size:1.5rem;font-weight:800;color:var(--accent)}
+.timer-banner p{font-size:.85rem;color:var(--muted);margin-top:.2rem}
+
+.dump-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1rem 0}
+.dump-section{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;position:relative;overflow:hidden}
+.dump-section::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
+.dump-section h3{font-size:.9rem;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+.dump-section table{width:100%;border-collapse:collapse;font-size:.78rem}
+.dump-section th{background:#fef2f2;padding:.3rem .5rem;text-align:left;font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+.dump-section td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
+.dump-section code{font-family:'Consolas',monospace;font-weight:700;color:var(--accent);font-size:.82rem}
+.dump-section ul{list-style:none;padding:0;margin:0}
+.dump-section li{font-size:.8rem;padding:.2rem 0;padding-left:.8rem;position:relative;line-height:1.4}
+.dump-section li::before{content:'•';position:absolute;left:0;color:var(--accent)}
+.dump-section .note{font-size:.72rem;color:var(--muted);margin-top:.4rem;font-style:italic}
+
+.full-width{grid-column:1/-1}
+
+.callout{background:var(--accent-light);border:1px solid #fca5a5;border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0}
+.callout-title{font-weight:700;font-size:.85rem;color:var(--accent);margin-bottom:.3rem}
+.callout p{font-size:.85rem;margin-bottom:.3rem}.callout p:last-child{margin-bottom:0}
+
+@media print{
+  .sheet-header{background:#7f1d1d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .dump-section::before,.dump-section th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-size:12px}
+  .container{padding:.5rem}
+  .sheet-header{padding:1rem}
+  .sheet-header .back{display:none}
+  .dump-grid{gap:.5rem}
+  .dump-section{padding:.6rem .8rem}
+  .timer-banner{padding:.5rem;margin:.5rem 0}
+}
+@media(max-width:700px){.sheet-header{padding:1.5rem 1rem 1.2rem}.sheet-header h1{font-size:1.4rem}.container{padding:1.5rem 1rem 3rem}.dump-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="sheet-header">
+  <a class="back" href="index.html">← Back to Cheat Sheets</a>
+  <h1>⚡ Brain Dump Reference Card</h1>
+  <div class="subtitle">Everything to write on scratch paper in the first 5 minutes before starting questions</div>
+  <div class="domain-badge">Exam Day · Print This · Practice Writing in Under 5 Minutes</div>
+</div>
+<div class="container">
+
+<div class="timer-banner">
+  <div class="big">⏱ Target: Under 5 Minutes</div>
+  <p>Write this on your scratch paper before touching Question 1. Practice daily during your last 2 weeks of prep.</p>
+</div>
+
+<div class="dump-grid">
+
+  <!-- EVM FORMULAS -->
+  <div class="dump-section">
+    <h3>📊 EVM Formulas</h3>
+    <table>
+      <tr><th>Metric</th><th>Formula</th><th>Meaning</th></tr>
+      <tr><td>SV</td><td><code>EV − PV</code></td><td>− = behind sched</td></tr>
+      <tr><td>CV</td><td><code>EV − AC</code></td><td>− = over budget</td></tr>
+      <tr><td>SPI</td><td><code>EV / PV</code></td><td>&lt;1 = behind sched</td></tr>
+      <tr><td>CPI</td><td><code>EV / AC</code></td><td>&lt;1 = over budget</td></tr>
+      <tr><td>EAC (typ)</td><td><code>BAC / CPI</code></td><td>Default on exam</td></tr>
+      <tr><td>EAC (atyp)</td><td><code>AC + (BAC−EV)</code></td><td>One-time variance</td></tr>
+      <tr><td>EAC (both)</td><td><code>AC + (BAC−EV)/(CPI×SPI)</code></td><td>Both factors</td></tr>
+      <tr><td>ETC</td><td><code>EAC − AC</code></td><td>Cost to finish</td></tr>
+      <tr><td>VAC</td><td><code>BAC − EAC</code></td><td>− = over at end</td></tr>
+      <tr><td>TCPI</td><td><code>(BAC−EV) / (BAC−AC)</code></td><td>&gt;1 = must improve</td></tr>
+    </table>
+    <div class="note">EV is always first in variances and numerator in indices. P = schedule, C = cost.</div>
+  </div>
+
+  <!-- OTHER FORMULAS -->
+  <div class="dump-section">
+    <h3>📝 Other Key Formulas</h3>
+    <table>
+      <tr><th>Formula</th><th>Equation</th></tr>
+      <tr><td>Comm Channels</td><td><code>n(n−1) / 2</code></td></tr>
+      <tr><td>PERT</td><td><code>(O + 4M + P) / 6</code></td></tr>
+      <tr><td>Std Dev (σ)</td><td><code>(P − O) / 6</code></td></tr>
+      <tr><td>PTA (FPIF)</td><td><code>((CP−TP)/BSR) + TC</code></td></tr>
+    </table>
+    <div class="note">PERT: O=optimistic, M=most likely, P=pessimistic. PTA only for FPIF contracts.</div>
+  </div>
+
+  <!-- CONFLICT RESOLUTION -->
+  <div class="dump-section">
+    <h3>🤝 Conflict Resolution (PMI Order)</h3>
+    <ul>
+      <li><strong>1. Collaborate/Problem Solve</strong> — Win-win ⭐ PMI's #1</li>
+      <li><strong>2. Compromise</strong> — Each gives up something</li>
+      <li><strong>3. Smooth/Accommodate</strong> — Emphasize agreement</li>
+      <li><strong>4. Force/Direct</strong> — Emergency only</li>
+      <li><strong>5. Withdraw/Avoid</strong> — Temporary retreat</li>
+    </ul>
+  </div>
+
+  <!-- RISK RESPONSES -->
+  <div class="dump-section">
+    <h3>⚠️ Risk Response Strategies</h3>
+    <table>
+      <tr><th>Threats (−)</th><th>Opportunities (+)</th></tr>
+      <tr><td>Avoid</td><td>Exploit</td></tr>
+      <tr><td>Transfer</td><td>Share</td></tr>
+      <tr><td>Mitigate</td><td>Enhance</td></tr>
+      <tr><td colspan="2" style="text-align:center"><strong>Accept</strong> (both) · <strong>Escalate</strong> (both)</td></tr>
+    </table>
+  </div>
+
+  <!-- TUCKMAN -->
+  <div class="dump-section">
+    <h3>👥 Tuckman's Stages</h3>
+    <ul>
+      <li><strong>Forming</strong> → Polite, uncertain (PM: Direct)</li>
+      <li><strong>Storming</strong> → Conflict, power struggles (PM: Coach)</li>
+      <li><strong>Norming</strong> → Trust, cohesion (PM: Support)</li>
+      <li><strong>Performing</strong> → High productivity (PM: Delegate)</li>
+      <li><strong>Adjourning</strong> → Closure (PM: Celebrate)</li>
+    </ul>
+  </div>
+
+  <!-- CONTRACT TYPES -->
+  <div class="dump-section">
+    <h3>📝 Contract Types (Buyer Risk → Seller Risk)</h3>
+    <ul>
+      <li><strong>CPPC</strong> — Cost + % of cost (worst for buyer)</li>
+      <li><strong>CPFF</strong> — Cost + fixed fee</li>
+      <li><strong>CPIF</strong> — Cost + incentive fee</li>
+      <li><strong>T&M</strong> — Time & materials (shared)</li>
+      <li><strong>FPIF</strong> — Fixed price + incentive (PTA applies)</li>
+      <li><strong>FFP</strong> — Firm fixed price (worst for seller)</li>
+    </ul>
+  </div>
+
+  <!-- CHANGE CONTROL -->
+  <div class="dump-section">
+    <h3>📋 Change Control Process</h3>
+    <ul>
+      <li><strong>1.</strong> Change identified</li>
+      <li><strong>2.</strong> Assess impact (scope, schedule, cost, risk)</li>
+      <li><strong>3.</strong> Submit change request</li>
+      <li><strong>4.</strong> CCB reviews (approve/reject/defer)</li>
+      <li><strong>5.</strong> Update plans & baselines if approved</li>
+      <li><strong>6.</strong> Communicate decision</li>
+    </ul>
+    <div class="note">NEVER make the change immediately. ALWAYS assess first.</div>
+  </div>
+
+  <!-- PMI MINDSET -->
+  <div class="dump-section">
+    <h3>🧠 PMI Mindset Quick Rules</h3>
+    <ul>
+      <li>Servant leadership > authority</li>
+      <li>Assess before acting (always)</li>
+      <li>Follow the process (always)</li>
+      <li>Never gold plate</li>
+      <li>Ethics first (honesty, responsibility, respect, fairness)</li>
+      <li>Engage stakeholders early & continuously</li>
+      <li>Charter = PM's authority</li>
+      <li>Facilitate > Direct</li>
+    </ul>
+  </div>
+
+  <!-- 12 PRINCIPLES -->
+  <div class="dump-section full-width">
+    <h3>🧭 12 PMBOK 7 Principles</h3>
+    <table>
+      <tr><th>People (4)</th><th>Approach (4)</th><th>Outcome (4)</th></tr>
+      <tr><td>1. Stewardship</td><td>5. Systems Thinking</td><td>4. Value</td></tr>
+      <tr><td>2. Team</td><td>7. Tailoring</td><td>8. Quality</td></tr>
+      <tr><td>3. Stakeholders</td><td>9. Complexity</td><td>10. Risk</td></tr>
+      <tr><td>6. Leadership</td><td>11. Adaptability</td><td>12. Change</td></tr>
+    </table>
+  </div>
+
+  <!-- EXAM TIMING -->
+  <div class="dump-section full-width">
+    <h3>⏱ Exam Timing Reference</h3>
+    <table>
+      <tr><th>Detail</th><th>Value</th><th>Detail</th><th>Value</th></tr>
+      <tr><td>Questions</td><td><strong>180</strong> (175 scored)</td><td>Time per Q</td><td><strong>~76 seconds</strong></td></tr>
+      <tr><td>Total time</td><td><strong>230 minutes</strong></td><td>Break 1</td><td><strong>After Q60</strong> (10 min)</td></tr>
+      <tr><td>Domains</td><td>People 42% · Process 50% · Biz 8%</td><td>Break 2</td><td><strong>After Q120</strong> (10 min)</td></tr>
+    </table>
+    <div class="note">Read the LAST sentence first. Eliminate 2 wrong answers. Flag & move on if > 2 min. Take BOTH breaks. Don't change answers unless certain you misread.</div>
+  </div>
+
+</div>
+
+<div class="callout">
+  <div class="callout-title">🎯 Practice Plan</div>
+  <p><strong>Last 2 weeks:</strong> Practice writing this entire brain dump from memory every day. Time yourself — target under 5 minutes.</p>
+  <p><strong>Exam day:</strong> Write it on scratch paper during the tutorial/survey time before Q1. This frees your working memory for scenario analysis.</p>
+  <p><strong>Print this page</strong> and keep it next to your study materials for daily practice.</p>
+</div>
+
+</div>
+</body>
+</html>

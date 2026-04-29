@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECO Domain Overview — PMP Cheat Sheet</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#b45309;--accent-light:#fef3c7;--border:#e7e5e4;--card-bg:#fff;--people:#7c3aed;--people-light:#ede9fe;--process:#2563eb;--process-light:#dbeafe;--biz:#be185d;--biz-light:#fce7f3}
+html{font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+.sheet-header{background:linear-gradient(135deg,#78350f,#b45309,#451a03);color:#fff;padding:2rem 2rem 1.5rem}
+.sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}.sheet-header .back:hover{color:#fff}
+.sheet-header h1{font-size:1.8rem;margin-top:.5rem}.sheet-header .subtitle{opacity:.85;font-size:.95rem;margin-top:.3rem}
+.sheet-header .domain-badge{display:inline-block;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:12px;font-size:.7rem;margin-top:.6rem;font-weight:600}
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.section-title{font-size:1.3rem;font-weight:700;margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:.5rem}
+.section-title:first-child{margin-top:0}
+.section-title.people{color:var(--people)}.section-title.process{color:var(--process)}.section-title.biz{color:var(--biz)}
+.diagram-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1rem 0;overflow-x:auto}
+
+/* Domain overview bars */
+.domain-bars{display:flex;gap:0;border-radius:10px;overflow:hidden;margin:1rem 0;font-weight:700;color:#fff;text-align:center;font-size:.85rem}
+.domain-bars .people{background:var(--people);flex:42;padding:.8rem .5rem}
+.domain-bars .process{background:var(--process);flex:50;padding:.8rem .5rem}
+.domain-bars .biz{background:var(--biz);flex:8;padding:.8rem .5rem}
+
+/* Task list */
+.task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.7rem;margin:1rem 0}
+.task-item{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:.7rem 1rem;display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem}
+.task-item .task-num{font-weight:700;font-size:.7rem;min-width:2rem;padding:.15rem .4rem;border-radius:6px;text-align:center;flex-shrink:0;margin-top:.1rem}
+.task-item.people .task-num{background:var(--people-light);color:var(--people)}
+.task-item.process .task-num{background:var(--process-light);color:var(--process)}
+.task-item.biz .task-num{background:var(--biz-light);color:var(--biz)}
+.task-item .task-text{line-height:1.4}
+.task-item .task-text strong{display:block;font-size:.85rem;margin-bottom:.1rem}
+.task-item .task-text span{color:var(--muted);font-size:.75rem}
+
+.callout{background:var(--accent-light);border:1px solid #fbbf24;border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0}
+.callout-title{font-weight:700;font-size:.85rem;color:var(--accent);margin-bottom:.3rem}
+.callout p{font-size:.85rem;margin-bottom:.3rem}.callout p:last-child{margin-bottom:0}
+
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0}
+.stat-card{text-align:center;padding:1.2rem;border-radius:10px;border:1px solid var(--border)}
+.stat-card.people{background:var(--people-light)}.stat-card.process{background:var(--process-light)}.stat-card.biz{background:var(--biz-light)}
+.stat-card .pct{font-size:2rem;font-weight:800}
+.stat-card.people .pct{color:var(--people)}.stat-card.process .pct{color:var(--process)}.stat-card.biz .pct{color:var(--biz)}
+.stat-card .label{font-size:.85rem;font-weight:600;margin-top:.2rem}
+.stat-card .tasks{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+
+@media print{.sheet-header{background:#78350f!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.domain-bars div,.stat-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font-size:12px}.container{padding:1rem}.sheet-header .back{display:none}}
+@media(max-width:700px){.sheet-header{padding:1.5rem 1rem 1.2rem}.sheet-header h1{font-size:1.4rem}.container{padding:1.5rem 1rem 3rem}.task-grid,.stat-grid{grid-template-columns:1fr}.domain-bars{font-size:.7rem}}
+</style>
+</head>
+<body>
+<div class="sheet-header">
+  <a class="back" href="index.html">← Back to Cheat Sheets</a>
+  <h1>🗺️ ECO Domain Overview</h1>
+  <div class="subtitle">Exam Content Outline — All 3 domains, 35 tasks, and weightings</div>
+  <div class="domain-badge">The Exam Blueprint · Study This First</div>
+</div>
+<div class="container">
+
+<div class="section-title" style="margin-top:0;color:var(--accent)">📊 Domain Weightings</div>
+<div class="stat-grid">
+  <div class="stat-card people"><div class="pct">42%</div><div class="label">People</div><div class="tasks">14 tasks · ~76 questions</div></div>
+  <div class="stat-card process"><div class="pct">50%</div><div class="label">Process</div><div class="tasks">17 tasks · ~90 questions</div></div>
+  <div class="stat-card biz"><div class="pct">8%</div><div class="label">Business Environment</div><div class="tasks">4 tasks · ~14 questions</div></div>
+</div>
+<div class="domain-bars">
+  <div class="people">People 42%</div>
+  <div class="process">Process 50%</div>
+  <div class="biz">Biz 8%</div>
+</div>
+
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart TD
+  ECO["📋 <b>Exam Content Outline</b><br/>3 Domains · 35 Tasks · Enablers"]
+  ECO --> P["👥 <b>PEOPLE (42%)</b><br/>14 Tasks<br/><i>Leadership, team, stakeholders</i>"]
+  ECO --> PR["⚙️ <b>PROCESS (50%)</b><br/>17 Tasks<br/><i>Planning, execution, delivery</i>"]
+  ECO --> B["🏢 <b>BUSINESS ENV (8%)</b><br/>4 Tasks<br/><i>Value, compliance, change</i>"]
+
+  P --> P1["Manage conflict"]
+  P --> P2["Lead a team"]
+  P --> P3["Support performance"]
+  P --> P4["Empower members"]
+  P --> P5["...10 more tasks"]
+
+  PR --> PR1["Execute with urgency"]
+  PR --> PR2["Manage communications"]
+  PR --> PR3["Plan scope/schedule/budget"]
+  PR --> PR4["Manage risks & quality"]
+  PR --> PR5["...13 more tasks"]
+
+  B --> B1["Manage compliance"]
+  B --> B2["Deliver benefits & value"]
+  B --> B3["Evaluate external changes"]
+  B --> B4["Support org change"]
+
+  style ECO fill:#fef3c7,stroke:#b45309
+  style P fill:#ede9fe,stroke:#7c3aed
+  style PR fill:#dbeafe,stroke:#2563eb
+  style B fill:#fce7f3,stroke:#be185d
+  </pre>
+</div>
+
+<div class="section-title people">👥 Domain I: People (42% · 14 Tasks)</div>
+<div class="task-grid">
+  <div class="task-item people"><div class="task-num">T1</div><div class="task-text"><strong>Manage Conflict</strong><span>5 resolution techniques · Thomas-Kilmann · Collaborate preferred</span></div></div>
+  <div class="task-item people"><div class="task-num">T2</div><div class="task-text"><strong>Lead a Team</strong><span>Servant leadership · Vision · Diversity · Leadership styles</span></div></div>
+  <div class="task-item people"><div class="task-num">T3</div><div class="task-text"><strong>Support Team Performance</strong><span>Appraisal · Feedback · Recognition · Growth</span></div></div>
+  <div class="task-item people"><div class="task-num">T4</div><div class="task-text"><strong>Empower Team Members</strong><span>Strengths · Accountability · Decision authority</span></div></div>
+  <div class="task-item people"><div class="task-num">T5</div><div class="task-text"><strong>Ensure Adequate Training</strong><span>Competency gaps · Training options · Budget · Outcomes</span></div></div>
+  <div class="task-item people"><div class="task-num">T6</div><div class="task-text"><strong>Build a Team</strong><span>Skills assessment · Resource needs · Tuckman's model</span></div></div>
+  <div class="task-item people"><div class="task-num">T7</div><div class="task-text"><strong>Address Impediments</strong><span>Identify · Prioritize · Escalate · Remove blockers</span></div></div>
+  <div class="task-item people"><div class="task-num">T8</div><div class="task-text"><strong>Negotiate Agreements</strong><span>Boundaries · Priorities · Win-win strategies</span></div></div>
+  <div class="task-item people"><div class="task-num">T9</div><div class="task-text"><strong>Collaborate with Stakeholders</strong><span>Engagement needs · Alignment · Trust building</span></div></div>
+  <div class="task-item people"><div class="task-num">T10</div><div class="task-text"><strong>Build Shared Understanding</strong><span>Root cause · Consensus · Resolve misunderstandings</span></div></div>
+  <div class="task-item people"><div class="task-num">T11</div><div class="task-text"><strong>Engage Virtual Teams</strong><span>Virtual team needs · Tools · Effectiveness</span></div></div>
+  <div class="task-item people"><div class="task-num">T12</div><div class="task-text"><strong>Define Team Ground Rules</strong><span>Working principles · Environment · Violations</span></div></div>
+  <div class="task-item people"><div class="task-num">T13</div><div class="task-text"><strong>Mentor Stakeholders</strong><span>Time allocation · Mentoring opportunities</span></div></div>
+  <div class="task-item people"><div class="task-num">T14</div><div class="task-text"><strong>Promote via Emotional Intelligence</strong><span>Personality indicators · Self-awareness · Adjustment</span></div></div>
+</div>
+
+<div class="section-title process">⚙️ Domain II: Process (50% · 17 Tasks)</div>
+<div class="task-grid">
+  <div class="task-item process"><div class="task-num">T1</div><div class="task-text"><strong>Execute with Urgency for Business Value</strong><span>Incremental delivery · MVP · Value-driven prioritization</span></div></div>
+  <div class="task-item process"><div class="task-num">T2</div><div class="task-text"><strong>Manage Communications</strong><span>Needs analysis · Methods · Confirmation of understanding</span></div></div>
+  <div class="task-item process"><div class="task-num">T3</div><div class="task-text"><strong>Assess and Manage Risks</strong><span>Risk options · Prioritization · Response strategies</span></div></div>
+  <div class="task-item process"><div class="task-num">T4</div><div class="task-text"><strong>Engage Stakeholders</strong><span>Analysis · Categorization · Engagement strategy</span></div></div>
+  <div class="task-item process"><div class="task-num">T5</div><div class="task-text"><strong>Plan and Manage Budget/Resources</strong><span>Estimation · Challenges · Monitoring · Variance</span></div></div>
+  <div class="task-item process"><div class="task-num">T6</div><div class="task-text"><strong>Plan and Manage Schedule</strong><span>Estimation · Benchmarks · Measurement · Modification</span></div></div>
+  <div class="task-item process"><div class="task-num">T7</div><div class="task-text"><strong>Plan and Manage Quality</strong><span>Standards · Improvements · Governance · QA vs QC</span></div></div>
+  <div class="task-item process"><div class="task-num">T8</div><div class="task-text"><strong>Plan and Manage Scope</strong><span>Requirements · WBS · Validation · Scope creep</span></div></div>
+  <div class="task-item process"><div class="task-num">T9</div><div class="task-text"><strong>Integrate Planning Activities</strong><span>Consolidation · Dependencies · Data analysis</span></div></div>
+  <div class="task-item process"><div class="task-num">T10</div><div class="task-text"><strong>Manage Project Changes</strong><span>Anticipate · Strategy · Change control · CCB</span></div></div>
+  <div class="task-item process"><div class="task-num">T11</div><div class="task-text"><strong>Plan and Manage Procurement</strong><span>Requirements · Suppliers · Contract types · Strategy</span></div></div>
+  <div class="task-item process"><div class="task-num">T12</div><div class="task-text"><strong>Manage Project Artifacts</strong><span>Requirements · Updates · Effectiveness · Traceability</span></div></div>
+  <div class="task-item process"><div class="task-num">T13</div><div class="task-text"><strong>Determine Methodology/Methods</strong><span>Assessment · Execution strategy · Agile/Predictive/Hybrid</span></div></div>
+  <div class="task-item process"><div class="task-num">T14</div><div class="task-text"><strong>Establish Governance Structure</strong><span>Governance framework · Escalation paths · Decision rights</span></div></div>
+  <div class="task-item process"><div class="task-num">T15</div><div class="task-text"><strong>Manage Project Issues</strong><span>Risk-to-issue transition · Resolution · Collaboration</span></div></div>
+  <div class="task-item process"><div class="task-num">T16</div><div class="task-text"><strong>Ensure Knowledge Transfer</strong><span>Responsibilities · Expectations · Approach · Lessons learned</span></div></div>
+  <div class="task-item process"><div class="task-num">T17</div><div class="task-text"><strong>Plan and Manage Closure</strong><span>Criteria · Readiness · Conclusion · Transition</span></div></div>
+</div>
+
+<div class="section-title biz">🏢 Domain III: Business Environment (8% · 4 Tasks)</div>
+<div class="task-grid">
+  <div class="task-item biz"><div class="task-num">T1</div><div class="task-text"><strong>Plan and Manage Compliance</strong><span>Requirements · Categories · Threats · Methods · Consequences</span></div></div>
+  <div class="task-item biz"><div class="task-num">T2</div><div class="task-text"><strong>Evaluate and Deliver Benefits/Value</strong><span>Identification · Ownership · Measurement · Delivery options</span></div></div>
+  <div class="task-item biz"><div class="task-num">T3</div><div class="task-text"><strong>Evaluate External Business Environment Changes</strong><span>Survey · Assess impact · Recommend options · Continuous review</span></div></div>
+  <div class="task-item biz"><div class="task-num">T4</div><div class="task-text"><strong>Support Organizational Change</strong><span>Assess culture · Evaluate impact · Determine actions · Sustain</span></div></div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">💡 Exam Tips</div>
+  <p><strong>The ECO is the exam blueprint.</strong> Every question maps to a domain, task, and enabler. Study to the ECO, not the PMBOK.</p>
+  <p><strong>Enablers are illustrative, not exhaustive.</strong> The exam may test concepts beyond the listed enablers.</p>
+  <p><strong>People is the largest domain (42%).</strong> Don't underestimate it — servant leadership, conflict resolution, and stakeholder engagement dominate.</p>
+  <p><strong>~50% of questions involve agile/hybrid</strong> — spread across all three domains, not just Process.</p>
+</div>
+
+</div>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#fef3c7',primaryTextColor:'#1c1917',primaryBorderColor:'#b45309',lineColor:'#b45309',fontFamily:'system-ui, sans-serif',fontSize:'13px'},flowchart:{htmlLabels:true,curve:'basis',padding:15}});
+</script>
+</body>
+</html>

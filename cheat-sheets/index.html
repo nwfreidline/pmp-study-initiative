@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMP Cheat Sheets — Visual Quick Reference</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#b45309;
+  --accent-light:#fef3c7;--border:#e7e5e4;--card-bg:#fff;
+  --success:#16a34a;--blue:#2563eb;--purple:#7c3aed;--rose:#e11d48;
+}
+html{font-size:17px}
+body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+
+header{background:linear-gradient(135deg,#451a03,#78350f,#b45309);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+header h1{font-size:2.2rem;margin-bottom:.4rem;letter-spacing:-.02em}
+header p{font-size:1rem;opacity:.85;max-width:600px;margin:0 auto}
+header .badge{display:inline-block;background:rgba(255,255,255,.2);padding:.25rem .8rem;border-radius:20px;font-size:.75rem;margin-top:.8rem;backdrop-filter:blur(4px)}
+
+.container{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+.intro{text-align:center;margin-bottom:2.5rem;color:var(--muted);font-size:.95rem;max-width:700px;margin-left:auto;margin-right:auto}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem}
+
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .2s;cursor:pointer;text-decoration:none;color:var(--fg);display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden}
+.card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(180,83,9,.1);transform:translateY(-2px)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.card.evm::before{background:linear-gradient(90deg,#b45309,#d97706)}
+.card.principles::before{background:linear-gradient(90deg,#2563eb,#7c3aed)}
+.card.mindset::before{background:linear-gradient(90deg,#16a34a,#059669)}
+.card.risk::before{background:linear-gradient(90deg,#e11d48,#f43f5e)}
+.card.conflict::before{background:linear-gradient(90deg,#7c3aed,#a855f7)}
+.card.scrum::before{background:linear-gradient(90deg,#0891b2,#06b6d4)}
+.card.delivery::before{background:linear-gradient(90deg,#ea580c,#f97316)}
+.card.procurement::before{background:linear-gradient(90deg,#4f46e5,#6366f1)}
+.card.tuckman::before{background:linear-gradient(90deg,#0d9488,#14b8a6)}
+.card.eco::before{background:linear-gradient(90deg,#b45309,#78350f)}
+.card.stakeholder::before{background:linear-gradient(90deg,#c026d3,#d946ef)}
+.card.braindump::before{background:linear-gradient(90deg,#dc2626,#ef4444)}
+
+.card .icon{font-size:2rem;margin-bottom:.2rem}
+.card h2{font-size:1.1rem;line-height:1.3}
+.card p{font-size:.85rem;color:var(--muted);line-height:1.5;flex:1}
+.card .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem}
+.card .tag{font-size:.65rem;padding:.15rem .5rem;border-radius:10px;background:var(--accent-light);color:var(--accent);font-weight:600}
+.card .tag.domain-people{background:#ede9fe;color:#7c3aed}
+.card .tag.domain-process{background:#dbeafe;color:#2563eb}
+.card .tag.domain-biz{background:#fce7f3;color:#be185d}
+
+.card .status{position:absolute;top:1rem;right:1rem;font-size:.65rem;padding:.2rem .6rem;border-radius:10px;font-weight:600}
+.card .status.ready{background:#dcfce7;color:#16a34a}
+.card .status.coming{background:#fef3c7;color:#b45309}
+
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);text-decoration:none;font-size:.85rem;margin-bottom:1.5rem}
+.back-link:hover{text-decoration:underline}
+
+footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+
+@media(max-width:700px){
+  header{padding:2rem 1.2rem 1.8rem}
+  header h1{font-size:1.6rem}
+  .grid{grid-template-columns:1fr}
+  .container{padding:1.5rem 1rem 3rem}
+}
+@media print{
+  header{background:#451a03!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card:hover{transform:none;box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋 PMP Cheat Sheets</h1>
+  <p>Visual quick-reference guides for last-stage exam preparation. Open any sheet, review on screen, or print for offline study.</p>
+  <div class="badge">🎯 Target: June 2026 Exam</div>
+</header>
+
+<div class="container">
+  <p class="intro">Each cheat sheet is a self-contained page with Mermaid.js diagrams, color-coded cards, and visual layouts. Click any card to open it. All sheets are print-friendly.</p>
+
+  <div class="grid">
+
+    <a class="card evm" href="01-evm-formulas.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">📊</div>
+      <h2>EVM Formula Map</h2>
+      <p>All Earned Value Management formulas with a visual flowchart showing relationships, EAC variations, and interpretation rules.</p>
+      <div class="tags">
+        <span class="tag domain-process">Process</span>
+        <span class="tag">Formulas</span>
+        <span class="tag">Brain Dump</span>
+      </div>
+    </a>
+
+    <a class="card principles" href="02-twelve-principles.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">🧭</div>
+      <h2>12 Principles Mind Map</h2>
+      <p>PMBOK 7 principles grouped by People, Approach, and Outcome focus with key behaviors and exam tips.</p>
+      <div class="tags">
+        <span class="tag domain-process">Process</span>
+        <span class="tag domain-people">People</span>
+        <span class="tag">PMBOK 7</span>
+      </div>
+    </a>
+
+    <a class="card mindset" href="03-pmi-mindset.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">🧠</div>
+      <h2>PMI Mindset Decision Tree</h2>
+      <p>The "What would PMI do?" flowchart for scenario questions, plus the 10 golden rules in visual format.</p>
+      <div class="tags">
+        <span class="tag domain-people">People</span>
+        <span class="tag domain-process">Process</span>
+        <span class="tag">Exam Strategy</span>
+      </div>
+    </a>
+
+    <a class="card risk" href="04-risk-responses.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">⚠️</div>
+      <h2>Risk Response Strategy Grid</h2>
+      <p>Threats vs Opportunities with all response strategies, color-coded by type with decision guidance.</p>
+      <div class="tags">
+        <span class="tag domain-process">Process</span>
+        <span class="tag">Risk</span>
+      </div>
+    </a>
+
+    <a class="card conflict" href="05-conflict-resolution.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">🤝</div>
+      <h2>Conflict Resolution Quick Pick</h2>
+      <p>When to use each of the 5 conflict resolution techniques, with scenario examples and PMI preferences.</p>
+      <div class="tags">
+        <span class="tag domain-people">People</span>
+        <span class="tag">Leadership</span>
+      </div>
+    </a>
+
+    <a class="card scrum" href="06-scrum-sprint.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">🔄</div>
+      <h2>Scrum Sprint Cycle</h2>
+      <p>Visual timeline of sprint events, roles, artifacts, and timeboxes in a circular flow diagram.</p>
+      <div class="tags">
+        <span class="tag domain-process">Process</span>
+        <span class="tag">Agile</span>
+      </div>
+    </a>
+
+    <a class="card delivery" href="07-delivery-approaches.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">🛤️</div>
+      <h2>Delivery Approach Selector</h2>
+      <p>Decision tree for choosing Predictive vs Agile vs Hybrid based on project characteristics.</p>
+      <div class="tags">
+        <span class="tag domain-process">Process</span>
+        <span class="tag">Methodology</span>
+      </div>
+    </a>
+
+    <a class="card procurement" href="08-procurement-contracts.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">📝</div>
+      <h2>Procurement Contract Spectrum</h2>
+      <p>Visual risk continuum from Cost Plus to Fixed Price with buyer/seller risk indicators.</p>
+      <div class="tags">
+        <span class="tag domain-process">Process</span>
+        <span class="tag">Procurement</span>
+      </div>
+    </a>
+
+    <a class="card tuckman" href="09-tuckman-stages.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">👥</div>
+      <h2>Tuckman's Team Stages</h2>
+      <p>Team development progression with PM actions, behaviors, and leadership style at each stage.</p>
+      <div class="tags">
+        <span class="tag domain-people">People</span>
+        <span class="tag">Team</span>
+      </div>
+    </a>
+
+    <a class="card eco" href="10-eco-overview.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">🗺️</div>
+      <h2>ECO Domain Overview</h2>
+      <p>All 3 domains, 35 tasks, and weightings in a visual breakdown with key enablers.</p>
+      <div class="tags">
+        <span class="tag domain-people">People 42%</span>
+        <span class="tag domain-process">Process 50%</span>
+        <span class="tag domain-biz">Biz Env 8%</span>
+      </div>
+    </a>
+
+    <a class="card stakeholder" href="11-stakeholder-engagement.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">📡</div>
+      <h2>Stakeholder Engagement Levels</h2>
+      <p>Progression from Unaware → Leading with strategies to move stakeholders through each level.</p>
+      <div class="tags">
+        <span class="tag domain-people">People</span>
+        <span class="tag">Stakeholders</span>
+      </div>
+    </a>
+
+    <a class="card braindump" href="12-brain-dump.html">
+      <span class="status ready">✓ Ready</span>
+      <div class="icon">⚡</div>
+      <h2>Brain Dump Reference Card</h2>
+      <p>Everything to write on scratch paper in the first 5 minutes — formulas, lists, and key frameworks.</p>
+      <div class="tags">
+        <span class="tag">Exam Day</span>
+        <span class="tag">Formulas</span>
+        <span class="tag">Brain Dump</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  PMP Exam Prep — Cheat Sheets &middot; Visual quick reference for exam preparation &middot; Not affiliated with PMI
+</footer>
+
+</body>
+</html>

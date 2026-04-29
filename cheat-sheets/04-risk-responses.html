@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Response Strategy Grid — PMP Cheat Sheet</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#e11d48;--accent-light:#ffe4e6;--border:#e7e5e4;--card-bg:#fff;--threat:#dc2626;--threat-light:#fef2f2;--opp:#16a34a;--opp-light:#f0fdf4}
+html{font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+.sheet-header{background:linear-gradient(135deg,#881337,#e11d48,#f43f5e);color:#fff;padding:2rem 2rem 1.5rem}
+.sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}.sheet-header .back:hover{color:#fff}
+.sheet-header h1{font-size:1.8rem;margin-top:.5rem}.sheet-header .subtitle{opacity:.85;font-size:.95rem;margin-top:.3rem}
+.sheet-header .domain-badge{display:inline-block;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:12px;font-size:.7rem;margin-top:.6rem;font-weight:600}
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.section-title{font-size:1.3rem;font-weight:700;color:var(--accent);margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:.5rem}
+.section-title:first-child{margin-top:0}
+.diagram-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1rem 0;overflow-x:auto}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1rem 0}
+.col-header{font-size:1.1rem;font-weight:700;padding:.8rem 1rem;border-radius:10px 10px 0 0;text-align:center;color:#fff}
+.col-header.threat{background:var(--threat)}.col-header.opp{background:var(--opp)}
+.strat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1.1rem;margin-bottom:.8rem}
+.strat-card h3{font-size:.95rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem}
+.strat-card.threat h3{color:var(--threat)}.strat-card.opp h3{color:var(--opp)}
+.strat-card .def{font-size:.82rem;color:var(--muted);margin-bottom:.5rem;line-height:1.5;font-style:italic}
+.strat-card .example{font-size:.82rem;background:#f5f5f4;border-radius:6px;padding:.5rem .7rem;line-height:1.5}
+.strat-card .example strong{color:var(--fg)}
+.shared-card{background:var(--card-bg);border:2px dashed var(--border);border-radius:10px;padding:1.1rem;margin-bottom:.8rem;grid-column:1/-1}
+.shared-card h3{font-size:.95rem;color:var(--muted);margin-bottom:.3rem}
+.shared-card .def{font-size:.82rem;color:var(--muted);line-height:1.5;font-style:italic}
+.callout{background:var(--accent-light);border:1px solid #fda4af;border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0}
+.callout-title{font-weight:700;font-size:.85rem;color:var(--accent);margin-bottom:.3rem}
+.callout p{font-size:.85rem;margin-bottom:.3rem}.callout p:last-child{margin-bottom:0}
+.process-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin:1rem 0}
+.process-step{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center}
+.process-step .num{font-size:1.5rem;font-weight:700;color:var(--accent);margin-bottom:.3rem}
+.process-step .label{font-size:.85rem;font-weight:600;margin-bottom:.2rem}
+.process-step .desc{font-size:.75rem;color:var(--muted)}
+@media print{.sheet-header{background:#881337!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font-size:13px}.container{padding:1rem}.sheet-header .back{display:none}}
+@media(max-width:700px){.sheet-header{padding:1.5rem 1rem 1.2rem}.sheet-header h1{font-size:1.4rem}.container{padding:1.5rem 1rem 3rem}.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="sheet-header">
+  <a class="back" href="index.html">← Back to Cheat Sheets</a>
+  <h1>⚠️ Risk Response Strategy Grid</h1>
+  <div class="subtitle">Threats vs Opportunities — All response strategies with examples</div>
+  <div class="domain-badge">Process Domain · Risk Management</div>
+</div>
+<div class="container">
+
+<div class="section-title" style="margin-top:0">🔄 Risk Management Process Flow</div>
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart LR
+  A["Identify<br/>Risks"] --> B["Qualitative<br/>Analysis"]
+  B --> C["Quantitative<br/>Analysis"]
+  C --> D["Plan Risk<br/>Responses"]
+  D --> E["Implement<br/>Responses"]
+  E --> F["Monitor<br/>Risks"]
+  F -->|"New risks<br/>identified"| A
+
+  style A fill:#ffe4e6,stroke:#e11d48
+  style B fill:#fef3c7,stroke:#b45309
+  style C fill:#ede9fe,stroke:#7c3aed
+  style D fill:#dbeafe,stroke:#2563eb
+  style E fill:#dcfce7,stroke:#16a34a
+  style F fill:#fce7f3,stroke:#c026d3
+  </pre>
+</div>
+
+<div class="section-title">🛡️ Threat Responses vs 🌟 Opportunity Responses</div>
+
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart TD
+  R["⚠️ RISK IDENTIFIED"]
+  R -->|"Negative impact"| T["🛡️ THREAT"]
+  R -->|"Positive impact"| O["🌟 OPPORTUNITY"]
+
+  T --> TA["<b>Avoid</b><br/>Eliminate the threat"]
+  T --> TT["<b>Transfer</b><br/>Shift to a third party"]
+  T --> TM["<b>Mitigate</b><br/>Reduce probability/impact"]
+  T --> TAc["<b>Accept</b><br/>Acknowledge & budget"]
+  T --> TE["<b>Escalate</b><br/>Above PM authority"]
+
+  O --> OE["<b>Exploit</b><br/>Make it happen"]
+  O --> OS["<b>Share</b><br/>Partner to capture"]
+  O --> OEn["<b>Enhance</b><br/>Increase probability/impact"]
+  O --> OA["<b>Accept</b><br/>Take it if it comes"]
+  O --> OEs["<b>Escalate</b><br/>Above PM authority"]
+
+  style R fill:#fef3c7,stroke:#b45309
+  style T fill:#fef2f2,stroke:#dc2626
+  style O fill:#f0fdf4,stroke:#16a34a
+  style TA fill:#fef2f2,stroke:#dc2626
+  style TT fill:#fef2f2,stroke:#dc2626
+  style TM fill:#fef2f2,stroke:#dc2626
+  style TAc fill:#fef2f2,stroke:#dc2626
+  style TE fill:#fef2f2,stroke:#dc2626
+  style OE fill:#f0fdf4,stroke:#16a34a
+  style OS fill:#f0fdf4,stroke:#16a34a
+  style OEn fill:#f0fdf4,stroke:#16a34a
+  style OA fill:#f0fdf4,stroke:#16a34a
+  style OEs fill:#f0fdf4,stroke:#16a34a
+  </pre>
+</div>
+
+<div class="two-col">
+  <div>
+    <div class="col-header threat">🛡️ Threat Responses (Negative Risks)</div>
+    <div class="strat-card threat">
+      <h3>🚫 Avoid</h3>
+      <div class="def">Eliminate the threat entirely by changing the project plan.</div>
+      <div class="example"><strong>Example:</strong> Remove a risky feature from scope. Change technology to one the team knows. Extend the timeline to avoid resource conflicts.</div>
+    </div>
+    <div class="strat-card threat">
+      <h3>↗️ Transfer</h3>
+      <div class="def">Shift the negative impact to a third party (doesn't eliminate it).</div>
+      <div class="example"><strong>Example:</strong> Buy insurance. Use a fixed-price contract (transfers cost risk to seller). Outsource a risky component to a specialist vendor.</div>
+    </div>
+    <div class="strat-card threat">
+      <h3>📉 Mitigate</h3>
+      <div class="def">Reduce the probability and/or impact to an acceptable level.</div>
+      <div class="example"><strong>Example:</strong> Add testing phases. Build a prototype first. Cross-train team members. Add redundancy to critical systems.</div>
+    </div>
+  </div>
+  <div>
+    <div class="col-header opp">🌟 Opportunity Responses (Positive Risks)</div>
+    <div class="strat-card opp">
+      <h3>🎯 Exploit</h3>
+      <div class="def">Ensure the opportunity definitely happens.</div>
+      <div class="example"><strong>Example:</strong> Assign the best resources to ensure early delivery. Use proven technology to guarantee quality bonus.</div>
+    </div>
+    <div class="strat-card opp">
+      <h3>🤝 Share</h3>
+      <div class="def">Partner with a third party better positioned to capture the opportunity.</div>
+      <div class="example"><strong>Example:</strong> Form a joint venture. Partner with a company that has the expertise to deliver faster.</div>
+    </div>
+    <div class="strat-card opp">
+      <h3>📈 Enhance</h3>
+      <div class="def">Increase the probability and/or impact of the opportunity.</div>
+      <div class="example"><strong>Example:</strong> Add resources to finish early and earn a bonus. Invest in training to increase quality.</div>
+    </div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-top:0">
+  <div class="shared-card">
+    <h3>✋ Accept (Both Threats & Opportunities)</h3>
+    <div class="def">Acknowledge the risk but take no proactive action. <strong>Active acceptance:</strong> set aside a contingency reserve. <strong>Passive acceptance:</strong> deal with it if it happens. Used when the risk is low priority or the cost of response exceeds the impact.</div>
+  </div>
+  <div class="shared-card">
+    <h3>⬆️ Escalate (Both Threats & Opportunities)</h3>
+    <div class="def">The risk is outside the project's scope or the PM's authority. Escalate to program, portfolio, or organizational level. The PM still tracks it but doesn't own the response.</div>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">💡 Exam Tips</div>
+  <p><strong>Mirror pattern:</strong> Avoid↔Exploit, Transfer↔Share, Mitigate↔Enhance, Accept↔Accept, Escalate↔Escalate.</p>
+  <p><strong>Transfer ≠ eliminate.</strong> The risk still exists — someone else owns it. Insurance is the classic example.</p>
+  <p><strong>Residual risk:</strong> Risk remaining after a response is implemented. Always document it.</p>
+  <p><strong>Secondary risk:</strong> A new risk created by implementing a risk response. Always analyze for these.</p>
+  <p><strong>Workaround:</strong> An unplanned response to a risk that has occurred (wasn't identified or accepted). Different from contingency plan (planned response to identified risk).</p>
+</div>
+
+<div class="section-title">📊 Qualitative vs Quantitative Analysis</div>
+<div class="diagram-wrap">
+  <pre class="mermaid">
+flowchart LR
+  subgraph qual ["📋 QUALITATIVE (All Projects)"]
+    Q1["Probability ×<br/>Impact Matrix"]
+    Q2["Risk categorization<br/>(RBS)"]
+    Q3["Risk urgency<br/>assessment"]
+    Q4["Output: Prioritized<br/>risk list"]
+  end
+  subgraph quant ["📊 QUANTITATIVE (Large/Complex Only)"]
+    N1["Monte Carlo<br/>simulation"]
+    N2["Decision tree<br/>analysis"]
+    N3["Sensitivity<br/>analysis (tornado)"]
+    N4["Output: Probabilistic<br/>forecasts"]
+  end
+
+  style qual fill:#fef3c7,stroke:#b45309
+  style quant fill:#ede9fe,stroke:#7c3aed
+  </pre>
+</div>
+
+</div>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#ffe4e6',primaryTextColor:'#1c1917',primaryBorderColor:'#e11d48',lineColor:'#e11d48',fontFamily:'system-ui, sans-serif',fontSize:'13px'},flowchart:{htmlLabels:true,curve:'basis',padding:15}});
+</script>
+</body>
+</html>
