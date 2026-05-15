@@ -2,7 +2,7 @@
 
 A free, comprehensive, interactive study guide for the **PMP (Project Management Professional)** certification exam.
 
-**[→ Start Studying](https://nwfreidline.github.io/pm-study-book/)** · **[→ Take the Quiz](https://nwfreidline.github.io/pm-study-book/quiz.html)** · **[→ Cheat Sheets](https://nwfreidline.github.io/pm-study-book/cheat-sheets/)**
+**[→ Start Studying](https://nwfreidline.github.io/pm-study-book/)** · **[→ Crash Course](https://nwfreidline.github.io/pm-study-book/crash-course/)** · **[→ Take the Quiz](https://nwfreidline.github.io/pm-study-book/quiz.html)** · **[→ Cheat Sheets](https://nwfreidline.github.io/pm-study-book/cheat-sheets/)**
 
 ---
 
@@ -12,7 +12,34 @@ A self-contained HTML study book, quiz app, and visual cheat sheet collection co
 
 Built from the PMBOK Guide 7th Edition, the PMI Exam Content Outline, and the most recommended community study resources.
 
-## What's Covered
+## 🚀 Crash Course (NEW — Final Review)
+
+A comprehensive **29-page crash course** designed for your final days of study before the exam. Covers the entire PMP exam in a condensed, high-density format with visual diagrams, formula boxes, and exam tips.
+
+**[→ Start the Crash Course](https://nwfreidline.github.io/pm-study-book/crash-course/)**
+
+| Section | Pages | Coverage |
+|---------|-------|----------|
+| Exam Overview & Strategy | 2 | Blueprint, PMI mindset decision tree, golden rules, common traps |
+| 12 Principles (PMBOK 7) | 1 | All 12 principles with exam behaviors |
+| People Domain (42%) | 4 | Conflict (Thomas-Kilmann), motivation theories, leadership, power, EQ, Tuckman, communication |
+| Process Domain (50%) | 5 | Integration, scope/WBS, schedule/CPM, cost/EVM, quality (7 tools), risk, procurement, resources |
+| Agile & Hybrid | 5 | Manifesto, Scrum deep dive, Kanban, XP, Lean, metrics, estimation, scaled agile (SAFe) |
+| Business Environment (8%) | 2 | Benefits realization, project selection, org structures, change management models |
+| 8 Performance Domains | 1 | All 8 with outcomes and uncertainty types |
+| Formulas & Calculations | 2 | Complete EVM formula sheet, PERT, channels, EMV, brain dump template |
+| Stakeholders & Communications | 1 | Power/Interest grid, engagement matrix, comms plan |
+| Final Review & Exam Strategy | 3 | Key distinctions, exam day strategy, ultimate quick reference card |
+| | **29 pages** | |
+
+**Features:**
+- Same interactive format as the main study book (sidebar, progress tracking, keyboard nav)
+- Visual flow diagrams for processes and decision trees
+- Formula boxes with worked examples
+- Exam tips and callout boxes throughout
+- Mobile responsive
+
+## What's Covered (Full Study Book)
 
 | Chapter | Topic | Pages |
 |---------|-------|-------|
@@ -33,7 +60,7 @@ Built from the PMBOK Guide 7th Edition, the PMI Exam Content Outline, and the mo
 
 Plus a **255-question practice bank** with per-question explanations, domain scoring, difficulty levels, and topic tags — covering all three exam domains with proper weighting.
 
-## 🧠 Question Bank (NEW — 255 Questions)
+## 🧠 Question Bank (255 Questions)
 
 A comprehensive question bank designed to mirror the real PMP exam experience:
 
@@ -51,9 +78,7 @@ A comprehensive question bank designed to mirror the real PMP exam experience:
 - Detailed explanations for every answer
 - Built-in utility to generate randomized 180-question practice exams with correct domain distribution
 
-**Coming soon:** Full practice exam simulator (180 questions, 230-minute timer, breaks after Q60/Q120, pass/fail scoring)
-
-## 📋 Visual Cheat Sheets (NEW)
+## 📋 Visual Cheat Sheets
 
 12 visual quick-reference guides for last-stage exam preparation, built with interactive Mermaid.js diagrams. Print-friendly.
 
@@ -84,6 +109,13 @@ A comprehensive question bank designed to mirror the real PMP exam experience:
 - Clean serif typography designed for extended reading
 - Mobile-responsive layout
 
+**Crash Course:**
+- 29 pages of condensed, high-density review content
+- Visual flow diagrams and decision trees
+- Formula boxes with worked examples
+- Same interactive format with progress tracking
+- Designed for final 2-3 days before the exam
+
 **Quiz App:**
 - 255-question bank across all 3 exam domains (People, Process, Business Environment)
 - Single-answer AND multiple-response questions (mirrors real exam format)
@@ -113,6 +145,7 @@ Visit **[nwfreidline.github.io/pm-study-book](https://nwfreidline.github.io/pm-s
 
 ```
 index.html              ← Study book reader
+crash-course/           ← Comprehensive crash course (final review)
 quiz.html               ← Quiz app (50-question diagnostic)
 quiz-bank.js            ← Expanded 255-question bank (all domains)
 quiz-data.js            ← Original diagnostic quiz questions
