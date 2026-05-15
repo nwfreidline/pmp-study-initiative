@@ -31,7 +31,27 @@ Built from the PMBOK Guide 7th Edition, the PMI Exam Content Outline, and the mo
 | 13 | Final Review & Quick Reference | 1 |
 | | **Total** | **39 pages** |
 
-Plus a **50-question diagnostic quiz** with per-question explanations and domain scoring.
+Plus a **255-question practice bank** with per-question explanations, domain scoring, difficulty levels, and topic tags — covering all three exam domains with proper weighting.
+
+## 🧠 Question Bank (NEW — 255 Questions)
+
+A comprehensive question bank designed to mirror the real PMP exam experience:
+
+| Domain | Questions | Weight | Exam Target |
+|--------|-----------|--------|-------------|
+| People | 102 | 40% | 42% |
+| Process | 127 | 50% | 50% |
+| Business Environment | 26 | 10% | 8% |
+| **Total** | **255** | | |
+
+**Features:**
+- Mix of single-answer and multiple-response (select 2) questions — just like the real exam
+- Three difficulty levels: foundational, intermediate, advanced/scenario-heavy
+- Topic tags for targeted study (leadership, agile, EVM, risk, conflict, etc.)
+- Detailed explanations for every answer
+- Built-in utility to generate randomized 180-question practice exams with correct domain distribution
+
+**Coming soon:** Full practice exam simulator (180 questions, 230-minute timer, breaks after Q60/Q120, pass/fail scoring)
 
 ## 📋 Visual Cheat Sheets (NEW)
 
@@ -65,13 +85,16 @@ Plus a **50-question diagnostic quiz** with per-question explanations and domain
 - Mobile-responsive layout
 
 **Quiz App:**
-- 50 scenario-based questions across all 3 exam domains
+- 255-question bank across all 3 exam domains (People, Process, Business Environment)
+- Single-answer AND multiple-response questions (mirrors real exam format)
 - Select answer → check → see detailed explanation
 - Question flagging for review
 - Running timer
 - Domain-specific scoring breakdown
+- Difficulty levels and topic tags for targeted practice
 - Full review of incorrect answers with explanations
 - Retake functionality
+- 50-question diagnostic quiz also available for quick assessment
 
 **Cheat Sheets:**
 - 12 visual quick-reference guides with Mermaid.js diagrams
@@ -90,10 +113,11 @@ Visit **[nwfreidline.github.io/pm-study-book](https://nwfreidline.github.io/pm-s
 
 ```
 index.html              ← Study book reader
-quiz.html               ← Quiz app
+quiz.html               ← Quiz app (50-question diagnostic)
+quiz-bank.js            ← Expanded 255-question bank (all domains)
+quiz-data.js            ← Original diagnostic quiz questions
 pages.js                ← Study content (Ch 1-8)
 pages-continued.js      ← Study content (Ch 8-13)
-quiz-data.js            ← Quiz questions
 cheat-sheets/           ← 12 visual cheat sheets (open index.html)
 docs/                   ← Reference materials (formulas, agile, study plan)
 week-1/                 ← Week 1 detailed study materials (markdown)
