@@ -7,7 +7,15 @@
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#0891b2;--accent-light:#cffafe;--border:#e7e5e4;--card-bg:#fff}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#0891b2;--accent-light:#cffafe;--border:#e7e5e4;--card-bg:#fff;
+  --gold:#C69214;
+}
+html.dark{--bg:#1a1a2e;--fg:#e4e4e7;--muted:#a1a1aa;--accent:#5b9bd5;--accent-light:#1e3a5f;--border:#2d2d44;--card-bg:#23233a;--gold:#e0a82e}
+html.dark .sheet-header{position:relative;background:linear-gradient(135deg,#001d3d,#003B71,#005a9e)!important}
+html.dark .formula-card,html.dark .other-card,html.dark .interp-card{background:var(--card-bg);border-color:var(--border)}
+html.dark .eac-table tr:nth-child(even),html.dark #content tr:nth-child(even){background:#1e1e32}
+html.dark .callout{background:var(--accent-light);border-color:var(--gold)}
+html.dark .diagram-wrap{background:var(--card-bg);border-color:var(--border)}
 html{font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
 .sheet-header{background:linear-gradient(135deg,#164e63,#0891b2,#06b6d4);color:#fff;padding:2rem 2rem 1.5rem}
 .sheet-header .back{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;display:inline-flex;align-items:center;gap:.3rem}.sheet-header .back:hover{color:#fff}
@@ -57,6 +65,7 @@ html{font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:va
 </head>
 <body>
 <div class="sheet-header">
+  <button onclick="toggleTheme()" id="theme-toggle" style="position:absolute;top:1rem;right:1rem;padding:.3rem .7rem;border:1px solid rgba(255,255,255,.3);border-radius:6px;background:transparent;color:#fff;cursor:pointer;font-size:.75rem">🌙 Dark</button>
   <a class="back" href="index.html">← Back to Cheat Sheets</a>
   <h1>🔄 Scrum Sprint Cycle</h1>
   <div class="subtitle">Roles, events, artifacts, and timeboxes — the complete Scrum framework</div>
@@ -208,6 +217,10 @@ flowchart LR
 </div>
 <script>
 mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#cffafe',primaryTextColor:'#1c1917',primaryBorderColor:'#0891b2',lineColor:'#0891b2',fontFamily:'system-ui, sans-serif',fontSize:'13px'},flowchart:{htmlLabels:true,curve:'basis',padding:15}});
+</script>
+<script>
+function toggleTheme(){const d=document.documentElement.classList.toggle('dark');localStorage.setItem('pmp-theme',d?'dark':'light');document.getElementById('theme-toggle').textContent=d?'☀️ Light':'🌙 Dark'}
+if(localStorage.getItem('pmp-theme')==='dark'){document.documentElement.classList.add('dark');document.getElementById('theme-toggle').textContent='☀️ Light'}
 </script>
 </body>
 </html>
