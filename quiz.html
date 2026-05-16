@@ -3,293 +3,680 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PMP Diagnostic Quiz</title>
+<title>PMP Practice Quiz — Full Bank</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--accent:#003B71;--accent-light:#e8f0fa;--border:#e7e5e4;--card:#fff;--success:#16a34a;--error:#dc2626;--blue:#2563eb;--gold:#C69214}
-html.dark{--bg:#1a1a2e;--fg:#e4e4e7;--muted:#a1a1aa;--accent:#5b9bd5;--accent-light:#1e3a5f;--border:#2d2d44;--card:#23233a;--gold:#e0a82e}
-html.dark .option:hover{border-color:var(--accent);background:var(--accent-light)}
-html.dark .option.selected{border-color:var(--blue);background:#1e2a4a}
-html.dark .option.correct{border-color:var(--success);background:#1a2e1a}
-html.dark .option.incorrect{border-color:var(--error);background:#2e1a1a}
-html.dark .explanation.right{background:#1a2e1a;border-color:#16a34a}
-html.dark .explanation.wrong{background:#2e1a1a;border-color:#dc2626}
-html.dark .q-domain{background:var(--accent-light);color:var(--accent)}
-html.dark .domain-card{background:var(--card);border-color:var(--border)}
-html{font-size:17px}
-body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6;min-height:100vh}
-.container{max-width:760px;margin:0 auto;padding:2rem 1.5rem}
-h1{font-size:1.6rem;color:var(--accent);margin-bottom:.3rem}
-.subtitle{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
-.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
-.theme-btn{padding:.3rem .7rem;border:1px solid var(--border);border-radius:6px;background:var(--card);cursor:pointer;font-size:.75rem;font-family:system-ui,sans-serif;color:var(--fg)}
-.theme-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-/* Progress */
-.progress-wrap{display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem}
-.progress-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#6b7280;--accent:#003B71;--gold:#C69214;--accent-light:#e8f0fa;--border:#e5e7eb;--card:#fff;--success:#16a34a;--error:#dc2626;--blue:#2563eb;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.06)}
+[data-theme="dark"]{--bg:#1a1a2e;--fg:#e4e4e7;--muted:#9ca3af;--accent:#5b9bd5;--gold:#C69214;--accent-light:#1e3a5f;--border:#2d2d44;--card:#23233a;--shadow:0 1px 3px rgba(0,0,0,.3)}
+html{font-size:16px}
+body{font-family:system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.6;min-height:100vh;transition:background .2s,color .2s}
+.container{max-width:800px;margin:0 auto;padding:1.5rem 1.25rem}
+h1{font-size:1.5rem;color:var(--accent);margin-bottom:.2rem}
+h2{font-size:1.2rem;color:var(--accent);margin-bottom:.8rem}
+.subtitle{color:var(--muted);font-size:.82rem;margin-bottom:1.2rem}
+</style>
+<style>
+/* Theme toggle */
+.theme-toggle{position:fixed;top:1rem;right:1rem;z-index:100;background:var(--card);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;box-shadow:var(--shadow);transition:all .2s}
+.theme-toggle:hover{transform:scale(1.1)}
+
+/* Setup screen */
+.setup-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.setup-card h3{font-size:.95rem;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+.filter-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.4rem}
+.chip{display:inline-flex;align-items:center;gap:.3rem;padding:.35rem .7rem;border:1.5px solid var(--border);border-radius:20px;font-size:.8rem;cursor:pointer;transition:all .15s;user-select:none;background:var(--card)}
+.chip:hover{border-color:var(--accent)}
+.chip.active{background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:600}
+.chip input{display:none}
+.count-selector{display:flex;gap:.5rem;flex-wrap:wrap}
+.count-btn{padding:.4rem .9rem;border:1.5px solid var(--border);border-radius:20px;font-size:.82rem;cursor:pointer;background:var(--card);transition:all .15s}
+.count-btn:hover{border-color:var(--accent)}
+.count-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.match-count{margin-top:.8rem;padding:.6rem 1rem;background:var(--accent-light);border-radius:8px;font-size:.85rem;color:var(--accent);font-weight:600;text-align:center}
+.presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem;margin-bottom:1rem}
+.preset-btn{padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-size:.78rem;cursor:pointer;background:var(--card);text-align:center;transition:all .15s}
+.preset-btn:hover{border-color:var(--gold);background:var(--accent-light)}
+.preset-btn .label{font-weight:700;color:var(--accent);display:block;margin-bottom:.15rem}
+.preset-btn .desc{color:var(--muted);font-size:.72rem}
+.start-btn{display:block;width:100%;padding:.8rem;border:none;border-radius:var(--radius);background:var(--accent);color:#fff;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .15s;margin-top:1rem}
+.start-btn:hover{opacity:.88}
+.start-btn:disabled{opacity:.4;cursor:default}
+
+/* Topic tags */
+.topic-cloud{display:flex;flex-wrap:wrap;gap:.4rem;max-height:120px;overflow-y:auto;padding:.3rem 0}
+.topic-tag{font-size:.72rem;padding:.25rem .55rem;border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all .15s;background:var(--card)}
+.topic-tag:hover{border-color:var(--gold)}
+.topic-tag.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+</style>
+<style>
+/* Progress bar */
+.progress-wrap{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.progress-bar{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden}
 .progress-fill{height:100%;background:var(--accent);border-radius:4px;transition:width .3s}
-.progress-text{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.progress-text{font-size:.78rem;color:var(--muted);white-space:nowrap}
 /* Timer */
-.timer{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem;display:flex;align-items:center;gap:.4rem}
-.timer .icon{font-size:1rem}
+.timer{font-size:.82rem;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
 /* Question card */
-.q-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
-.q-num{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
-.q-domain{font-size:.7rem;padding:.2rem .5rem;border-radius:4px;background:var(--accent-light);color:var(--accent);font-weight:600}
-.q-text{font-size:1rem;margin-bottom:1rem;line-height:1.65}
-.options{display:flex;flex-direction:column;gap:.5rem}
-.option{display:flex;align-items:flex-start;gap:.6rem;padding:.7rem .9rem;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;font-size:.92rem}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;flex-wrap:wrap;gap:.4rem}
+.q-num{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+.q-meta{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+.q-domain{font-size:.68rem;padding:.2rem .5rem;border-radius:4px;background:var(--accent-light);color:var(--accent);font-weight:600}
+.q-diff{font-size:.68rem;padding:.2rem .5rem;border-radius:4px;background:var(--accent-light);color:var(--gold);font-weight:600}
+.q-text{font-size:.95rem;margin-bottom:1rem;line-height:1.65}
+.q-hint{font-size:.78rem;color:var(--gold);margin-bottom:.8rem;font-style:italic}
+.options{display:flex;flex-direction:column;gap:.45rem}
+.option{display:flex;align-items:flex-start;gap:.6rem;padding:.65rem .85rem;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;font-size:.88rem;line-height:1.5}
 .option:hover{border-color:var(--accent);background:var(--accent-light)}
 .option.selected{border-color:var(--blue);background:#eff6ff}
+[data-theme="dark"] .option.selected{background:#1e3a5f}
 .option.correct{border-color:var(--success);background:#f0fdf4}
+[data-theme="dark"] .option.correct{background:#0f2e1a}
 .option.incorrect{border-color:var(--error);background:#fef2f2}
+[data-theme="dark"] .option.incorrect{background:#2e0f0f}
 .option.disabled{pointer-events:none;opacity:.7}
 .option.disabled.correct{opacity:1}
-.option .letter{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;transition:all .15s}
+.option .letter{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;transition:all .15s}
 .option.selected .letter{border-color:var(--blue);background:var(--blue);color:#fff}
 .option.correct .letter{border-color:var(--success);background:var(--success);color:#fff}
 .option.incorrect .letter{border-color:var(--error);background:var(--error);color:#fff}
+/* Checkbox style for multi */
+.option .check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;transition:all .15s}
+.option.selected .check-box{border-color:var(--blue);background:var(--blue);color:#fff}
+.option.correct .check-box{border-color:var(--success);background:var(--success);color:#fff}
+.option.incorrect .check-box{border-color:var(--error);background:var(--error);color:#fff}
 /* Explanation */
-.explanation{margin-top:.8rem;padding:.8rem 1rem;border-radius:8px;font-size:.88rem;line-height:1.55;display:none}
+.explanation{margin-top:.8rem;padding:.8rem 1rem;border-radius:8px;font-size:.84rem;line-height:1.55;display:none}
 .explanation.show{display:block}
 .explanation.right{background:#f0fdf4;border:1px solid #bbf7d0}
+[data-theme="dark"] .explanation.right{background:#0f2e1a;border-color:#166534}
 .explanation.wrong{background:#fef2f2;border:1px solid #fecaca}
+[data-theme="dark"] .explanation.wrong{background:#2e0f0f;border-color:#991b1b}
+</style>
+<style>
 /* Buttons */
-.btn-row{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
-button{padding:.55rem 1.2rem;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;font-size:.85rem;font-family:inherit;transition:all .15s;color:var(--fg)}
+.btn-row{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap;align-items:center}
+button{padding:.5rem 1.1rem;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--fg);cursor:pointer;font-size:.82rem;font-family:inherit;transition:all .15s}
 button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 button.primary:hover{opacity:.85}
-button:disabled{opacity:.3;cursor:default}
-/* Results */
-.results{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:center}
-.results h2{font-size:1.4rem;color:var(--accent);margin-bottom:.5rem}
-.score-big{font-size:3rem;font-weight:800;color:var(--accent);margin:.5rem 0}
-.score-label{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
-.domain-scores{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
-.domain-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem 1.2rem;min-width:140px}
-.domain-card .name{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
-.domain-card .val{font-size:1.4rem;font-weight:700}
-.domain-card .val.good{color:var(--success)}
-.domain-card .val.ok{color:var(--gold)}
-.domain-card .val.bad{color:var(--error)}
+button:disabled{opacity:.3;cursor:default;pointer-events:none}
+.flag-btn{font-size:.72rem;padding:.3rem .6rem;background:transparent;border:1px solid var(--border);color:var(--muted)}
+.flag-btn.flagged{background:#fef3c7;border-color:#fbbf24;color:var(--gold)}
 /* Nav */
 .nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
-.nav-row .info{font-size:.8rem;color:var(--muted)}
-/* Flag */
-.flag-btn{font-size:.75rem;padding:.3rem .6rem;background:transparent;border:1px solid var(--border);color:var(--muted)}
-.flag-btn.flagged{background:var(--accent-light);border-color:var(--gold);color:var(--accent)}
+.nav-row .info{font-size:.78rem;color:var(--muted)}
+/* Nav grid */
+.nav-grid{display:flex;flex-wrap:wrap;gap:3px;margin-top:1rem}
+.nav-dot{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;cursor:pointer;border:2px solid transparent;transition:all .1s}
+.nav-dot:hover{transform:scale(1.15)}
+.nav-dot.current{border-color:var(--fg)}
+
+/* Results */
+.results-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:var(--shadow)}
+.score-big{font-size:3.2rem;font-weight:800;color:var(--accent);margin:.4rem 0}
+.score-label{color:var(--muted);font-size:.88rem;margin-bottom:1.2rem}
+.breakdown-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;margin-bottom:1.5rem;text-align:center}
+.breakdown-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.7rem .5rem}
+.breakdown-item .name{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:.2rem}
+.breakdown-item .val{font-size:1.3rem;font-weight:700}
+.breakdown-item .val.good{color:var(--success)}
+.breakdown-item .val.ok{color:var(--gold)}
+.breakdown-item .val.bad{color:var(--error)}
+.breakdown-item .detail{font-size:.68rem;color:var(--muted)}
+/* Review */
+.review-section{text-align:left;margin-top:1.5rem}
+.review-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:.7rem}
+.review-item .q-label{font-size:.72rem;color:var(--gold);font-weight:700;margin-bottom:.3rem}
+.review-item .q-body{font-size:.88rem;margin-bottom:.4rem}
+.review-item .answer-line{font-size:.82rem;margin-bottom:.15rem}
+.review-item .answer-line.wrong{color:var(--error)}
+.review-item .answer-line.right{color:var(--success)}
+.review-item .expl{font-size:.8rem;color:var(--muted);margin-top:.3rem;padding-top:.3rem;border-top:1px solid var(--border)}
+/* Topic performance */
+.topic-perf{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;justify-content:center}
+.topic-perf-item{font-size:.72rem;padding:.25rem .6rem;border-radius:12px;border:1px solid var(--border)}
+.topic-perf-item.good{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+.topic-perf-item.bad{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+[data-theme="dark"] .topic-perf-item.good{background:#0f2e1a;border-color:#166534;color:#4ade80}
+[data-theme="dark"] .topic-perf-item.bad{background:#2e0f0f;border-color:#991b1b;color:#fca5a5}
+/* Responsive */
+@media(max-width:600px){
+  .container{padding:1rem .8rem}
+  .q-card{padding:1rem}
+  .presets{grid-template-columns:1fr 1fr}
+  .breakdown-grid{grid-template-columns:1fr 1fr}
+  .nav-dot{width:18px;height:18px;font-size:7px}
+}
 </style>
 </head>
 <body>
+<div class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</div>
 <div class="container" id="app"></div>
-<script src="quiz-data.js"></script>
+<script src="quiz-bank.js"></script>
 <script>
+// ─── State ───────────────────────────────────────────────────────────────
 const app = document.getElementById('app');
-let answers = new Array(quizQuestions.length).fill(-1);
-let revealed = new Array(quizQuestions.length).fill(false);
-let flagged = new Set();
-let currentQ = 0;
-let startTime = null;
-let timerInterval = null;
-let quizFinished = false;
+let state = {
+  screen: 'setup', // setup | quiz | results
+  questions: [],
+  answers: [],      // for single: index or -1; for multi: Set
+  revealed: [],
+  flagged: new Set(),
+  currentQ: 0,
+  startTime: null,
+  timerInterval: null,
+  filters: {
+    domains: new Set(['People','Process','Business Environment']),
+    diffs: new Set([1,2,3]),
+    topics: new Set(),
+    count: 25
+  }
+};
 
+// ─── Utilities ───────────────────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getAllTopics() {
+  const topics = new Set();
+  questionBank.forEach(q => (q.t || []).forEach(t => topics.add(t)));
+  return [...topics].sort();
+}
+
+function getFilteredQuestions() {
+  return questionBank.filter(q => {
+    if (!state.filters.domains.has(q.d)) return false;
+    if (!state.filters.diffs.has(q.diff)) return false;
+    if (state.filters.topics.size > 0) {
+      const hasMatch = (q.t || []).some(t => state.filters.topics.has(t));
+      if (!hasMatch) return false;
+    }
+    return true;
+  });
+}
+
+function diffLabel(d) { return d === 1 ? 'Foundation' : d === 2 ? 'Intermediate' : 'Advanced'; }
+function diffIcon(d) { return d === 1 ? '⬡' : d === 2 ? '⬡⬡' : '⬡⬡⬡'; }
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+function isCorrect(qIdx) {
+  const q = state.questions[qIdx];
+  const ans = state.answers[qIdx];
+  if (q.type === 'multi') {
+    if (!(ans instanceof Set)) return false;
+    const correct = new Set(q.a);
+    if (ans.size !== correct.size) return false;
+    for (const v of ans) { if (!correct.has(v)) return false; }
+    return true;
+  }
+  return ans === q.a;
+}
+
+// ─── Theme ───────────────────────────────────────────────────────────────
+function initTheme() {
+  const saved = localStorage.getItem('pmp-theme');
+  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  updateThemeIcon();
+}
 function toggleTheme() {
-  const isDark = document.documentElement.classList.toggle('dark');
-  localStorage.setItem('pmp-theme', isDark ? 'dark' : 'light');
-  const btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('pmp-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('pmp-theme', 'dark');
+  }
+  updateThemeIcon();
 }
-if (localStorage.getItem('pmp-theme') === 'dark') {
-  document.documentElement.classList.add('dark');
+function updateThemeIcon() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.getElementById('themeToggle').textContent = isDark ? '☀️' : '🌙';
+}
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+initTheme();
+</script>
+<script>
+// ─── Setup Screen ────────────────────────────────────────────────────────
+function renderSetup() {
+  state.screen = 'setup';
+  const allTopics = getAllTopics();
+  const matchCount = getFilteredQuestions().length;
+
+  const domainChips = ['People','Process','Business Environment'].map(d => {
+    const active = state.filters.domains.has(d);
+    return `<label class="chip ${active?'active':''}"><input type="checkbox" ${active?'checked':''} onchange="toggleDomain('${d}')">${d}</label>`;
+  }).join('');
+
+  const diffChips = [{v:1,l:'Foundation'},{v:2,l:'Intermediate'},{v:3,l:'Advanced'}].map(({v,l}) => {
+    const active = state.filters.diffs.has(v);
+    return `<label class="chip ${active?'active':''}"><input type="checkbox" ${active?'checked':''} onchange="toggleDiff(${v})">${l}</label>`;
+  }).join('');
+
+  const topicTags = allTopics.map(t => {
+    const active = state.filters.topics.has(t);
+    return `<span class="topic-tag ${active?'active':''}" onclick="toggleTopic('${t}')">${t}</span>`;
+  }).join('');
+
+  const counts = [10, 25, 50, 100, 'All'];
+  const countBtns = counts.map(c => {
+    const val = c === 'All' ? 999 : c;
+    const active = state.filters.count === val;
+    return `<span class="count-btn ${active?'active':''}" onclick="setCount(${val})">${c === 'All' ? 'All' : c}</span>`;
+  }).join('');
+
+  app.innerHTML = `
+    <h1>PMP Practice Quiz</h1>
+    <div class="subtitle">Full 255-Question Bank · Configurable Practice</div>
+
+    <div class="setup-card">
+      <h3>⚡ Quick Start</h3>
+      <div class="presets">
+        <div class="preset-btn" onclick="applyPreset('quick10')"><span class="label">Quick 10</span><span class="desc">10 random, all domains</span></div>
+        <div class="preset-btn" onclick="applyPreset('people')"><span class="label">People Focus</span><span class="desc">25 People questions</span></div>
+        <div class="preset-btn" onclick="applyPreset('process')"><span class="label">Process Focus</span><span class="desc">25 Process questions</span></div>
+        <div class="preset-btn" onclick="applyPreset('hard')"><span class="label">Hard Mode</span><span class="desc">25 Advanced questions</span></div>
+        <div class="preset-btn" onclick="applyPreset('full')"><span class="label">Full Bank</span><span class="desc">All ${questionBank.length} questions</span></div>
+      </div>
+    </div>
+
+    <div class="setup-card">
+      <h3>🎯 Domain</h3>
+      <div class="filter-group">${domainChips}</div>
+    </div>
+
+    <div class="setup-card">
+      <h3>📊 Difficulty</h3>
+      <div class="filter-group">${diffChips}</div>
+    </div>
+
+    <div class="setup-card">
+      <h3>🏷️ Topics <span style="font-size:.72rem;color:var(--muted);font-weight:400">(click to filter, none = all)</span></h3>
+      <div class="topic-cloud">${topicTags}</div>
+    </div>
+
+    <div class="setup-card">
+      <h3>📝 Question Count</h3>
+      <div class="count-selector">${countBtns}</div>
+      <div class="match-count">${matchCount} question${matchCount!==1?'s':''} match your filters${state.filters.count < 999 ? ` · will use ${Math.min(state.filters.count, matchCount)}` : ''}</div>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()" ${matchCount===0?'disabled':''}>Start Quiz (${Math.min(state.filters.count === 999 ? matchCount : state.filters.count, matchCount)} questions)</button>
+  `;
 }
 
+function toggleDomain(d) {
+  if (state.filters.domains.has(d)) state.filters.domains.delete(d);
+  else state.filters.domains.add(d);
+  renderSetup();
+}
+function toggleDiff(v) {
+  if (state.filters.diffs.has(v)) state.filters.diffs.delete(v);
+  else state.filters.diffs.add(v);
+  renderSetup();
+}
+function toggleTopic(t) {
+  if (state.filters.topics.has(t)) state.filters.topics.delete(t);
+  else state.filters.topics.add(t);
+  renderSetup();
+}
+function setCount(c) {
+  state.filters.count = c;
+  renderSetup();
+}
+
+function applyPreset(preset) {
+  state.filters.topics = new Set();
+  switch(preset) {
+    case 'quick10':
+      state.filters.domains = new Set(['People','Process','Business Environment']);
+      state.filters.diffs = new Set([1,2,3]);
+      state.filters.count = 10;
+      break;
+    case 'people':
+      state.filters.domains = new Set(['People']);
+      state.filters.diffs = new Set([1,2,3]);
+      state.filters.count = 25;
+      break;
+    case 'process':
+      state.filters.domains = new Set(['Process']);
+      state.filters.diffs = new Set([1,2,3]);
+      state.filters.count = 25;
+      break;
+    case 'hard':
+      state.filters.domains = new Set(['People','Process','Business Environment']);
+      state.filters.diffs = new Set([3]);
+      state.filters.count = 25;
+      break;
+    case 'full':
+      state.filters.domains = new Set(['People','Process','Business Environment']);
+      state.filters.diffs = new Set([1,2,3]);
+      state.filters.count = 999;
+      break;
+  }
+  startQuiz();
+}
+</script>
+<script>
+// ─── Quiz Mode ───────────────────────────────────────────────────────────
 function startQuiz() {
-  startTime = Date.now();
-  timerInterval = setInterval(updateTimer, 1000);
+  let filtered = getFilteredQuestions();
+  if (filtered.length === 0) { renderSetup(); return; }
+  filtered = shuffle(filtered);
+  const limit = state.filters.count === 999 ? filtered.length : Math.min(state.filters.count, filtered.length);
+  state.questions = filtered.slice(0, limit);
+  state.answers = state.questions.map(q => q.type === 'multi' ? new Set() : -1);
+  state.revealed = new Array(state.questions.length).fill(false);
+  state.flagged = new Set();
+  state.currentQ = 0;
+  state.screen = 'quiz';
+  state.startTime = Date.now();
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(updateTimer, 1000);
   renderQuestion();
 }
 
 function updateTimer() {
-  if (!startTime) return;
-  const elapsed = Math.floor((Date.now() - startTime) / 1000);
-  const mins = Math.floor(elapsed / 60);
-  const secs = elapsed % 60;
   const el = document.getElementById('timer-val');
-  if (el) el.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+  if (!el || !state.startTime) return;
+  const elapsed = Math.floor((Date.now() - state.startTime) / 1000);
+  el.textContent = formatTime(elapsed);
 }
 
 function selectAnswer(idx) {
-  if (revealed[currentQ]) return;
-  answers[currentQ] = idx;
+  if (state.revealed[state.currentQ]) return;
+  const q = state.questions[state.currentQ];
+  if (q.type === 'multi') {
+    const s = state.answers[state.currentQ];
+    if (s.has(idx)) s.delete(idx); else s.add(idx);
+  } else {
+    state.answers[state.currentQ] = idx;
+  }
   renderQuestion();
 }
 
 function revealAnswer() {
-  revealed[currentQ] = true;
+  state.revealed[state.currentQ] = true;
   renderQuestion();
 }
 
 function toggleFlag() {
-  if (flagged.has(currentQ)) flagged.delete(currentQ); else flagged.add(currentQ);
+  const c = state.currentQ;
+  if (state.flagged.has(c)) state.flagged.delete(c); else state.flagged.add(c);
   renderQuestion();
 }
 
 function navTo(idx) {
-  currentQ = idx;
+  if (idx < 0 || idx >= state.questions.length) return;
+  state.currentQ = idx;
   renderQuestion();
 }
 
 function finishQuiz() {
-  clearInterval(timerInterval);
-  quizFinished = true;
+  clearInterval(state.timerInterval);
+  state.screen = 'results';
   renderResults();
 }
 
 function renderQuestion() {
-  const q = quizQuestions[currentQ];
-  const isRevealed = revealed[currentQ];
-  const selected = answers[currentQ];
-  const isFlagged = flagged.has(currentQ);
-  const answeredCount = answers.filter(a => a >= 0).length;
-  const pct = (answeredCount / quizQuestions.length * 100).toFixed(0);
-  const isDark = document.documentElement.classList.contains('dark');
+  const q = state.questions[state.currentQ];
+  const idx = state.currentQ;
+  const isRevealed = state.revealed[idx];
+  const selected = state.answers[idx];
+  const isFlagged = state.flagged.has(idx);
+  const answeredCount = state.answers.filter((a, i) => {
+    const qi = state.questions[i];
+    if (qi.type === 'multi') return a instanceof Set && a.size > 0;
+    return a >= 0;
+  }).length;
+  const pct = (answeredCount / state.questions.length * 100).toFixed(0);
+  const isMulti = q.type === 'multi';
+  const correctAnswers = isMulti ? new Set(q.a) : null;
+  const selectCount = isMulti ? q.a.length : 0;
 
+  // Check if answer is ready to check
+  let canCheck = false;
+  if (isMulti) {
+    canCheck = selected instanceof Set && selected.size === selectCount;
+  } else {
+    canCheck = selected >= 0;
+  }
+
+  const letters = ['A','B','C','D','E','F','G','H'];
   let optionsHtml = q.o.map((opt, i) => {
-    const letters = ['A','B','C','D'];
     let cls = 'option';
+    const isSelected = isMulti ? (selected instanceof Set && selected.has(i)) : (selected === i);
     if (isRevealed) {
       cls += ' disabled';
-      if (i === q.a) cls += ' correct';
-      else if (i === selected && i !== q.a) cls += ' incorrect';
-    } else if (i === selected) {
+      if (isMulti) {
+        if (correctAnswers.has(i)) cls += ' correct';
+        else if (isSelected && !correctAnswers.has(i)) cls += ' incorrect';
+      } else {
+        if (i === q.a) cls += ' correct';
+        else if (isSelected && i !== q.a) cls += ' incorrect';
+      }
+    } else if (isSelected) {
       cls += ' selected';
     }
-    return `<div class="${cls}" onclick="selectAnswer(${i})"><span class="letter">${letters[i]}</span><span>${opt}</span></div>`;
+    const marker = isMulti
+      ? `<span class="check-box">${isSelected ? '✓' : ''}</span>`
+      : `<span class="letter">${letters[i]}</span>`;
+    return `<div class="${cls}" onclick="selectAnswer(${i})">${marker}<span>${opt}</span></div>`;
   }).join('');
 
   let explHtml = '';
   if (isRevealed) {
-    const isCorrect = selected === q.a;
-    explHtml = `<div class="explanation show ${isCorrect?'right':'wrong'}"><strong>${isCorrect?'✓ Correct!':'✗ Incorrect'}</strong><br>${q.e}</div>`;
+    const correct = isCorrect(idx);
+    explHtml = `<div class="explanation show ${correct?'right':'wrong'}"><strong>${correct?'✓ Correct!':'✗ Incorrect'}</strong><br>${q.e}</div>`;
   }
 
-  let dotsHtml = '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:1rem">';
-  quizQuestions.forEach((_, i) => {
-    let bg = isDark ? '#2d2d44' : '#e7e5e4';
-    if (answers[i] >= 0 && revealed[i]) {
-      bg = answers[i] === quizQuestions[i].a ? '#16a34a' : '#dc2626';
-    } else if (answers[i] >= 0) bg = '#2563eb';
-    if (flagged.has(i)) bg = isDark ? '#e0a82e' : '#C69214';
-    const border = i === currentQ ? `2px solid ${isDark?'#e4e4e7':'#1c1917'}` : '2px solid transparent';
-    dotsHtml += `<div onclick="navTo(${i})" style="width:20px;height:20px;border-radius:4px;background:${bg};cursor:pointer;border:${border};font-size:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">${i+1}</div>`;
+  // Nav grid
+  let gridHtml = '<div class="nav-grid">';
+  state.questions.forEach((_, i) => {
+    let bg = 'var(--border)';
+    if (state.revealed[i]) {
+      bg = isCorrect(i) ? 'var(--success)' : 'var(--error)';
+    } else {
+      const a = state.answers[i];
+      const hasAnswer = state.questions[i].type === 'multi' ? (a instanceof Set && a.size > 0) : a >= 0;
+      if (hasAnswer) bg = 'var(--blue)';
+    }
+    if (state.flagged.has(i)) bg = 'var(--gold)';
+    const cur = i === idx ? ' current' : '';
+    gridHtml += `<div class="nav-dot${cur}" style="background:${bg}" onclick="navTo(${i})">${i+1}</div>`;
   });
-  dotsHtml += '</div>';
+  gridHtml += '</div>';
 
   app.innerHTML = `
-    <div class="top-bar">
-      <h1>PMP Diagnostic Quiz</h1>
-      <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">${isDark?'☀️ Light':'🌙 Dark'}</button>
-    </div>
-    <div class="subtitle">50 Questions · Week 1 Foundation</div>
+    <h1>PMP Practice Quiz</h1>
+    <div class="subtitle">${state.questions.length} Questions · ${[...state.filters.domains].join(', ')}</div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="progress-text">${answeredCount}/${quizQuestions.length}</div>
+      <div class="progress-text">${answeredCount}/${state.questions.length}</div>
     </div>
-    <div class="timer"><span class="icon">⏱</span> <span id="timer-val">0:00</span></div>
+    <div class="timer"><span>⏱</span> <span id="timer-val">${formatTime(Math.floor((Date.now() - state.startTime) / 1000))}</span></div>
     <div class="q-card">
       <div class="q-header">
-        <span class="q-num">Question ${currentQ+1} of ${quizQuestions.length}</span>
-        <span class="q-domain">${q.d}</span>
+        <span class="q-num">Question ${idx+1} of ${state.questions.length}</span>
+        <div class="q-meta">
+          <span class="q-domain">${q.d}</span>
+          <span class="q-diff">${diffLabel(q.diff)}</span>
+        </div>
       </div>
       <div class="q-text">${q.q}</div>
+      ${isMulti ? `<div class="q-hint">Select ${selectCount} answers</div>` : ''}
       <div class="options">${optionsHtml}</div>
       ${explHtml}
       <div class="btn-row">
-        ${!isRevealed && selected >= 0 ? '<button class="primary" onclick="revealAnswer()">Check Answer</button>' : ''}
-        <button class="flag-btn${isFlagged?' flagged':''}" onclick="toggleFlag()">${isFlagged?'🚩 Flagged':'🏳 Flag'}</button>
+        ${!isRevealed && canCheck ? '<button class="primary" onclick="revealAnswer()">Check Answer</button>' : ''}
+        <button class="flag-btn${isFlagged?' flagged':''}" onclick="toggleFlag()">${isFlagged?'🚩 Flagged':'🏳️ Flag'}</button>
       </div>
     </div>
     <div class="nav-row">
-      <button ${currentQ===0?'disabled':''} onclick="navTo(${currentQ-1})">← Previous</button>
-      <div class="info">Page ${currentQ+1} of ${quizQuestions.length}</div>
-      ${currentQ < quizQuestions.length-1
-        ? `<button onclick="navTo(${currentQ+1})">Next →</button>`
+      <button ${idx===0?'disabled':''} onclick="navTo(${idx-1})">← Prev</button>
+      <div class="info">${idx+1} / ${state.questions.length}</div>
+      ${idx < state.questions.length-1
+        ? `<button onclick="navTo(${idx+1})">Next →</button>`
         : `<button class="primary" onclick="finishQuiz()">Finish Quiz</button>`}
     </div>
-    ${dotsHtml}
+    ${gridHtml}
   `;
-  updateTimer();
 }
-
+</script>
+<script>
+// ─── Results Screen ──────────────────────────────────────────────────────
 function renderResults() {
-  const elapsed = Math.floor((Date.now() - startTime) / 1000);
-  const mins = Math.floor(elapsed / 60);
-  const secs = elapsed % 60;
-  const isDark = document.documentElement.classList.contains('dark');
-  let correct = 0;
-  const domainStats = {People:{c:0,t:0},Process:{c:0,t:0},"Business Environment":{c:0,t:0}};
-  quizQuestions.forEach((q, i) => {
-    const d = q.d === "Business Environment" ? "Business Environment" : q.d;
-    if (!domainStats[d]) domainStats[d] = {c:0,t:0};
-    domainStats[d].t++;
-    if (answers[i] === q.a) { correct++; domainStats[d].c++; }
-  });
-  const pct = Math.round(correct / quizQuestions.length * 100);
-  let grade = pct >= 80 ? 'Strong foundation — ahead of schedule' : pct >= 60 ? 'Solid start — focus on weak areas' : pct >= 40 ? 'Expected for Week 1 — use results to guide study' : 'Re-read Week 1 materials before moving on';
+  const elapsed = Math.floor((Date.now() - state.startTime) / 1000);
+  const total = state.questions.length;
+  let correctCount = 0;
 
+  // Domain stats
+  const domainStats = {};
+  // Difficulty stats
+  const diffStats = {1:{c:0,t:0}, 2:{c:0,t:0}, 3:{c:0,t:0}};
+  // Topic stats
+  const topicStats = {};
+
+  state.questions.forEach((q, i) => {
+    const correct = isCorrect(i);
+    if (correct) correctCount++;
+
+    // Domain
+    if (!domainStats[q.d]) domainStats[q.d] = {c:0,t:0};
+    domainStats[q.d].t++;
+    if (correct) domainStats[q.d].c++;
+
+    // Difficulty
+    diffStats[q.diff].t++;
+    if (correct) diffStats[q.diff].c++;
+
+    // Topics
+    (q.t || []).forEach(tag => {
+      if (!topicStats[tag]) topicStats[tag] = {c:0,t:0};
+      topicStats[tag].t++;
+      if (correct) topicStats[tag].c++;
+    });
+  });
+
+  const pct = Math.round(correctCount / total * 100);
+
+  // Domain breakdown
   let domainHtml = Object.entries(domainStats).map(([name, s]) => {
-    const dp = s.t > 0 ? Math.round(s.c/s.t*100) : 0;
+    const dp = s.t > 0 ? Math.round(s.c / s.t * 100) : 0;
     const cls = dp >= 70 ? 'good' : dp >= 50 ? 'ok' : 'bad';
-    return `<div class="domain-card"><div class="name">${name}</div><div class="val ${cls}">${dp}%</div><div style="font-size:.7rem;color:var(--muted)">${s.c}/${s.t}</div></div>`;
+    return `<div class="breakdown-item"><div class="name">${name}</div><div class="val ${cls}">${dp}%</div><div class="detail">${s.c}/${s.t}</div></div>`;
   }).join('');
 
-  let reviewHtml = '<div style="text-align:left;margin-top:2rem">';
-  quizQuestions.forEach((q, i) => {
-    const isCorrect = answers[i] === q.a;
-    if (!isCorrect) {
-      const letters = ['A','B','C','D'];
-      reviewHtml += `<div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:.8rem">
-        <div style="font-size:.75rem;color:var(--accent);font-weight:700">Q${i+1} (${q.d}) — ✗ Incorrect</div>
-        <div style="margin:.4rem 0;font-size:.9rem">${q.q}</div>
-        <div style="font-size:.85rem;color:var(--error)">Your answer: ${answers[i]>=0?letters[answers[i]]+') '+q.o[answers[i]]:'(unanswered)'}</div>
-        <div style="font-size:.85rem;color:var(--success)">Correct: ${letters[q.a]}) ${q.o[q.a]}</div>
-        <div style="font-size:.82rem;color:var(--muted);margin-top:.3rem">${q.e}</div>
-      </div>`;
+  // Difficulty breakdown
+  let diffHtml = Object.entries(diffStats).filter(([,s]) => s.t > 0).map(([d, s]) => {
+    const dp = Math.round(s.c / s.t * 100);
+    const cls = dp >= 70 ? 'good' : dp >= 50 ? 'ok' : 'bad';
+    return `<div class="breakdown-item"><div class="name">${diffLabel(parseInt(d))}</div><div class="val ${cls}">${dp}%</div><div class="detail">${s.c}/${s.t}</div></div>`;
+  }).join('');
+
+  // Topic performance (sorted by worst first)
+  const topicEntries = Object.entries(topicStats)
+    .map(([tag, s]) => ({tag, pct: Math.round(s.c / s.t * 100), c: s.c, t: s.t}))
+    .sort((a, b) => a.pct - b.pct);
+
+  let topicHtml = topicEntries.map(({tag, pct: tp}) => {
+    const cls = tp >= 70 ? 'good' : 'bad';
+    return `<span class="topic-perf-item ${cls}">${tag}: ${tp}%</span>`;
+  }).join('');
+
+  // Review incorrect
+  const letters = ['A','B','C','D','E','F','G','H'];
+  let reviewHtml = '';
+  state.questions.forEach((q, i) => {
+    if (!isCorrect(i)) {
+      const ans = state.answers[i];
+      let yourAnswer = '';
+      let correctAnswer = '';
+      if (q.type === 'multi') {
+        const selected = ans instanceof Set ? [...ans].map(x => letters[x] + ') ' + q.o[x]).join(', ') : '(unanswered)';
+        const correct = q.a.map(x => letters[x] + ') ' + q.o[x]).join(', ');
+        yourAnswer = selected || '(unanswered)';
+        correctAnswer = correct;
+      } else {
+        yourAnswer = ans >= 0 ? letters[ans] + ') ' + q.o[ans] : '(unanswered)';
+        correctAnswer = letters[q.a] + ') ' + q.o[q.a];
+      }
+      reviewHtml += `
+        <div class="review-item">
+          <div class="q-label">Q${i+1} · ${q.d} · ${diffLabel(q.diff)}</div>
+          <div class="q-body">${q.q}</div>
+          <div class="answer-line wrong">Your answer: ${yourAnswer}</div>
+          <div class="answer-line right">Correct: ${correctAnswer}</div>
+          <div class="expl">${q.e}</div>
+        </div>`;
     }
   });
-  reviewHtml += '</div>';
+
+  const incorrectCount = total - correctCount;
 
   app.innerHTML = `
-    <div class="top-bar">
-      <h1>Quiz Complete!</h1>
-      <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">${isDark?'☀️ Light':'🌙 Dark'}</button>
-    </div>
-    <div class="results">
+    <div class="results-card">
+      <h2>Quiz Complete!</h2>
       <div class="score-big">${pct}%</div>
-      <div class="score-label">${correct} of ${quizQuestions.length} correct · ${mins}m ${secs}s</div>
-      <div style="margin-bottom:1rem;font-size:.9rem;color:var(--muted)">${grade}</div>
-      <div class="domain-scores">${domainHtml}</div>
-      <button class="primary" onclick="resetQuiz()">Retake Quiz</button>
+      <div class="score-label">${correctCount} of ${total} correct · ${formatTime(elapsed)}</div>
+
+      <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em">Domain Breakdown</h3>
+      <div class="breakdown-grid">${domainHtml}</div>
+
+      <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em">Difficulty Breakdown</h3>
+      <div class="breakdown-grid">${diffHtml}</div>
+
+      <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em">Topic Performance</h3>
+      <div class="topic-perf">${topicHtml || '<span style="color:var(--muted);font-size:.82rem">No topic data</span>'}</div>
+
+      <div class="btn-row" style="justify-content:center;margin-top:1.5rem">
+        <button class="primary" onclick="retakeSameSet()">Retake Same Set</button>
+        <button onclick="newQuiz()">New Quiz</button>
+      </div>
     </div>
-    <h2 style="margin-top:2rem;font-size:1.1rem;color:var(--accent)">Review Incorrect Answers</h2>
-    ${reviewHtml}
+
+    ${incorrectCount > 0 ? `
+      <div class="review-section">
+        <h2 style="margin-top:1.5rem;margin-bottom:.8rem">Review Incorrect (${incorrectCount})</h2>
+        ${reviewHtml}
+      </div>
+    ` : '<div style="text-align:center;margin-top:1.5rem;color:var(--success);font-weight:700;font-size:1.1rem">🎉 Perfect Score!</div>'}
   `;
 }
 
-function resetQuiz() {
-  answers = new Array(quizQuestions.length).fill(-1);
-  revealed = new Array(quizQuestions.length).fill(false);
-  flagged = new Set();
-  currentQ = 0;
-  quizFinished = false;
-  startTime = Date.now();
-  timerInterval = setInterval(updateTimer, 1000);
+function retakeSameSet() {
+  // Keep same questions, reset answers
+  state.answers = state.questions.map(q => q.type === 'multi' ? new Set() : -1);
+  state.revealed = new Array(state.questions.length).fill(false);
+  state.flagged = new Set();
+  state.currentQ = 0;
+  state.screen = 'quiz';
+  state.startTime = Date.now();
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(updateTimer, 1000);
   renderQuestion();
 }
 
-startQuiz();
+function newQuiz() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.screen = 'setup';
+  renderSetup();
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────
+renderSetup();
 </script>
 </body>
 </html>
