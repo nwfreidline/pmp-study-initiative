@@ -154,6 +154,8 @@ button:disabled{opacity:.3;cursor:default;pointer-events:none}
 <div class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</div>
 <div class="container" id="app"></div>
 <script src="quiz-bank.js"></script>
+<script src="quiz-bank-expansion.js"></script>
+<script>if (typeof additionalQuestions !== 'undefined') questionBank.push(...additionalQuestions);</script>
 <script>
 // ─── State ───────────────────────────────────────────────────────────────
 const app = document.getElementById('app');
